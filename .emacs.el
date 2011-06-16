@@ -22,6 +22,7 @@
 ;;
 ;; Python mod
 ;;
+(require 'python-mode)
 (setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
     (setq interpreter-mode-alist (cons '("python" . python-mode)
                                        interpreter-mode-alist))
@@ -74,6 +75,7 @@
 ;;
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/sass-mode"))
 (require 'sass-mode)
+(add-to-list 'auto-mode-alist '("\\.scss$" . sass-mode))
 ;;
 ;; MARKDOWN
 ;;
