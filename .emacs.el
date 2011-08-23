@@ -127,6 +127,7 @@
 ;;
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/sass-mode"))
 (require 'sass-mode)
+
 (add-to-list 'auto-mode-alist '("\\.scss$" . css-mode))
 ;;
 ;; MARKDOWN
