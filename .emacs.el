@@ -3,57 +3,7 @@
 ;; https://github.com/Alexandre-Strzelewicz/.emacs.d
 ;;
 
-(defvar hl-tags-start-overlay nil)
-(make-variable-buffer-local 'hl-tags-start-overlay)
 
-(defvar hl-tags-end-overlay nil)
-(make-variable-buffer-local 'hl-tags-end-overlay)
-
-(defun hl-tags-context ()
-  (save-excursion
-    (let ((ctx (sgml-get-context)))
-      (and ctx
-           (if (eq (sgml-tag-type (car ctx)) 'close)
-               (cons (sgml-get-context) ctx)
-             (cons ctx (progn
-                         (sgml-skip-tag-forward 1)
-                         (backward-char 1)
-                         (sgml-get-context))))))))
-
-(defun hl-tags-update ()
-  (let ((ctx (hl-tags-context)))
-    (if (null ctx)
-        (hl-tags-hide)
-      (hl-tags-show)
-      (move-overlay hl-tags-end-overlay
-                    (sgml-tag-start (caar ctx))
-                    (sgml-tag-end (caar ctx)))
-      (move-overlay hl-tags-start-overlay
-                    (sgml-tag-start (cadr ctx))
-                    (sgml-tag-end (cadr ctx))))))
-
-(defun hl-tags-show ()
-  (unless hl-tags-start-overlay
-    (setq hl-tags-start-overlay (make-overlay 1 1)
-          hl-tags-end-overlay (make-overlay 1 1))
-    (overlay-put hl-tags-start-overlay 'face 'show-paren-match-face)
-    (overlay-put hl-tags-end-overlay 'face 'show-paren-match-face)))
-
-(defun hl-tags-hide ()
-  (when hl-tags-start-overlay
-    (delete-overlay hl-tags-start-overlay)
-    (delete-overlay hl-tags-end-overlay)))
-
-(define-minor-mode hl-tags-mode
-  "Toggle hl-tags-mode."
-  nil "" nil
-  (if hl-tags-mode
-      (add-hook 'post-command-hook 'hl-tags-update nil t)
-    (remove-hook 'post-command-hook 'hl-tags-update t)
-    (hl-tags-hide)))
-
-
-(provide 'hl-tags-mode)
 
 
 (add-to-list 'load-path "~/.emacs.d/")
@@ -95,6 +45,7 @@
 ;; 
 (autoload 'espresso-mode "espresso" "Start espresso-mode" t)
 (add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
+(add-to-list 'auto-mode-alist '("\\.js.erb$" . espresso-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
 
 ;;Ruby emacs : https://github.com/remvee/emacs-rails
@@ -128,7 +79,12 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/sass-mode"))
 (require 'sass-mode)
 
+(add-to-list 'auto-mode-alist '("\\.ejs$" . html-mode))
+
+(add-to-list 'auto-mode-alist '("\\.less$" . css-mode))
 (add-to-list 'auto-mode-alist '("\\.scss$" . css-mode))
+(add-to-list 'auto-mode-alist '("\\.css.erb$" . css-mode))
+(add-to-list 'auto-mode-alist '("\\.scss.erb$" . css-mode))
 ;;
 ;; MARKDOWN
 ;;
@@ -141,6 +97,39 @@
 ;;
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/coffee-mode"))
 (require 'coffee-mode)
+
+;;
+;; Org-mode
+;;
+(require 'org-install)
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+
+;;
+;; Predictive
+;;
+;; (add-to-list 'load-path "~/.emacs.d/predictive/")
+;; ;; dictionary locations
+;; ;; (add-to-list 'load-path "~/.emacs.d/predictive/latex/")
+;; ;; (add-to-list 'load-path "~/.emacs.d/predictive/texinfo/")
+;; ;; (add-to-list 'load-path "~/.emacs.d/predictive/html/")
+;; ;; load predictive package
+;; (require 'predictive)
+;; (setq predictive-major-mode-alist nil)
+;; (predictive-mode)
+
+
+
+;;
+;; Smex mini-buffer completion IDO
+;;
+(require 'smex)
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex) 
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;;
 ;; COLOR PARENTHESIS
@@ -186,7 +175,9 @@
 ;;
 ;; Fly between window
 ;;
+
 (windmove-default-keybindings 'meta)
+
 ;;
 ;; Resize window
 ;;
@@ -195,3 +186,81 @@
 (global-set-key (kbd "<f7>") 'shrink-window)
 (global-set-key (kbd "<f8>") 'enlarge-window)
 
+
+     (add-to-list 'load-path (expand-file-name "~/.emacs.d/gc-refresh-mode"))
+     (require 'gc-refresh-mode)
+
+
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/gc-refresh"))
+;; (require 'gc-refresh-mode)
+
+;; (defun save-and-reload () "Save and reload browser" (interactive)
+;;   (save-buffer)
+;;   (shell-command "~/.emacs.d/googlechrome/reload.py")
+;;   )
+
+;;(define-key global-map "\C-x\C-s" 'save-and-reload)
+
+
+
+;;
+;;
+;; attr_accessor :a,
+;;                :time, # ms since epoch
+;;                :b,
+;;                :c
+;;
+(defadvice ruby-indent-line (after line-up-args activate)
+  (let (indent prev-indent arg-indent)
+    (save-excursion
+      (back-to-indentation)
+      (when (zerop (car (syntax-ppss)))
+        (setq indent (current-column))
+        (skip-chars-backward " \t\n")
+        (when (eq ?, (char-before))
+          (ruby-backward-sexp)
+          (back-to-indentation)
+          (setq prev-indent (current-column))
+          (skip-syntax-forward "w_.")
+          (skip-chars-forward " ")
+          (setq arg-indent (current-column)))))
+    (when prev-indent
+      (let ((offset (- (current-column) indent)))
+        (cond ((< indent prev-indent)
+               (indent-line-to prev-indent))
+              ((= indent prev-indent)
+               (indent-line-to arg-indent)))
+        (when (> offset 0) (forward-char offset))))))
+
+
+(defun align-to-colon (begin end)
+  "Align region to colon (:) signs"
+  (interactive "r")
+  (align-regexp begin end
+                (rx (group (zero-or-more (syntax whitespace))) ":") 1 1 ))
+
+(defun align-to-comma (begin end)
+  "Align region to comma signs"
+  (interactive "r")
+  (align-regexp begin end
+                (rx "," (group (zero-or-more (syntax whitespace))) ) 1 1 ))
+
+
+(defun align-to-equals (begin end)
+  "Align region to equal signs"
+  (interactive "r")
+  (align-regexp begin end
+                (rx (group (zero-or-more (syntax whitespace))) "=") 1 1 ))
+
+(defun align-to-hash (begin end)
+  "Align region to hash ( => ) signs"
+  (interactive "r")
+  (align-regexp begin end
+                (rx (group (zero-or-more (syntax whitespace))) "=>") 1 1 ))
+
+;; work with this
+(defun align-to-comma-before (begin end)
+  "Align region to equal signs"
+  (interactive "r")
+  (align-regexp begin end
+                (rx (group (zero-or-more (syntax whitespace))) ",") 1 1 ))
