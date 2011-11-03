@@ -187,8 +187,8 @@
 (global-set-key (kbd "<f8>") 'enlarge-window)
 
 
-     (add-to-list 'load-path (expand-file-name "~/.emacs.d/gc-refresh-mode"))
-     (require 'gc-refresh-mode)
+     ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/gc-refresh-mode"))
+     ;; (require 'gc-refresh-mode)
 
 
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/gc-refresh"))
