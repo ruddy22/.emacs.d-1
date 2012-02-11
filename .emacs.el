@@ -67,7 +67,6 @@
 ;(add-to-list 'load-path (expand-file-name "~/.emacs.d/rails-minor-mode"))
 ;(require 'rails)
 
-
  ;; Rinari
 (add-to-list 'load-path "~/.emacs.d/rinari")
 (require 'rinari)
