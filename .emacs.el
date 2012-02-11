@@ -17,15 +17,16 @@
            (inglorion-system-called-interactively-p)))))
 
 (add-to-list 'load-path "~/.emacs.d/")
+
+
 ;;
 ;; IDO
 ;;
-
 (require 'ido)
-  (setq ido-enable-flex-matching t)
-  (setq ido-everywhere t)
+;; Configuration
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
 (ido-mode t)
-;;  (ido-mode t)
 ;;
 ;; transform file to htmlified !
 ;;
@@ -68,9 +69,11 @@
 ;(require 'rails)
 
  ;; Rinari
-(add-to-list 'load-path "~/.emacs.d/rinari")
-(require 'rinari)
+;; (add-to-list 'load-path "~/.emacs.d/rinari")
+;; (require 'rinari)
 
+(require 'php-mode)
+(add-to-list 'auto-mode-alist '("\\.tpl$" . php-mode))
 ;;
 ;; ERB & co
 ;;
@@ -81,11 +84,16 @@
 ;;
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/yaml-mode"))
 (require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 ;;
 ;; HAML
 ;;
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/haml-mode"))
 (require 'haml-mode)
+(setq haml-mode-hook
+    (function (lambda ()
+                (setq indent-tabs-mode nil)
+                (setq c-indent-level 4))))
 ;;
 ;; SASS
 ;;
@@ -110,7 +118,6 @@
 ;;
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/coffee-mode"))
 (require 'coffee-mode)
-
 ;;
 ;; Org-mode
 ;;
