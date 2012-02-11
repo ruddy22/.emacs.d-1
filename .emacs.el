@@ -65,6 +65,11 @@
 
 ;;Ruby emacs : https://github.com/remvee/emacs-rails
 
+;; Display path insted twee<2>
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+
+
 ;(add-to-list 'load-path (expand-file-name "~/.emacs.d/rails-minor-mode"))
 ;(require 'rails)
 
@@ -284,3 +289,14 @@
   (interactive "r")
   (align-regexp begin end
                 (rx (group (zero-or-more (syntax whitespace))) ",") 1 1 ))
+
+;; Ruby buinding
+
+(add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Guardfile$" . ruby-mode))
+;; We never want to edit Rubinius bytecode
+(add-to-list 'completion-ignored-extensions ".rbc")
