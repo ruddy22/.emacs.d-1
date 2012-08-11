@@ -13,6 +13,9 @@
       desktop-load-locked-desktop nil)
 (desktop-save-mode 0)
 
+;;
+;; Enable saving workspace
+;;
 (defun my-desktop ()
   "Load the desktop and enable autosaving"
   (interactive)
@@ -20,41 +23,45 @@
     (desktop-read)
     (desktop-save-mode 1)))
 
+;;
+;; Get entire response from a server
+;;
+(defun view-url ()
+  "Open a new buffer containing the contents of URL."
+  (interactive)
+  (let* ((default (thing-at-point-url-at-point))
+         (url (read-from-minibuffer "URL: " default)))
+    (switch-to-buffer (url-retrieve-synchronously url))
+    (rename-buffer url t)
+    (cond ((search-forward "<?xml" nil t) (xml-mode))
+          ((search-forward "<html" nil t) (html-mode)))))
 
 
-
-
+(defun insert-date ()
+  "Insert a time-stamp according to locale's date and time format."
+  (interactive)
+  (insert (format-time-string "%c" (current-time))))
 
 ;;
-;; Autocomplete for shell
+;; Generate Lorem Ipsum
 ;;
-(condition-case nil (called-interactively-p 'interactive)
-  (error
-   ; Save reference to called-interactively-p in
-   ; inglorion-system-called-interactively-p
-   (fset 'inglorion-system-called-interactively-p
-         (symbol-function 'called-interactively-p))
-   ; Define called-interactively-p so that it discards
-   ; its arguments and calls inglorion-system-called-interactively-p
-   (fset 'called-interactively-p
-         (lambda (&rest args)
-           (inglorion-system-called-interactively-p)))))
-
-(defconst pcmpl-git-commands
-  '("add" "bisect" "branch" "checkout" "clone"
-    "commit" "diff" "fetch" "grep"
-    "init" "log" "merge" "mv" "pull" "push" "rebase"
-    "reset" "rm" "show" "status" "tag" )
-  "List of `git' commands")
-
-(defun pcomplete/git ()
-  "Completion for `git'"
-  (pcomplete-here* pcmpl-git-commands))
- 
+(defun lorem ()
+  "Insert a lorem ipsum."
+  (interactive)
+  (insert "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do "
+          "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim"
+          "ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut "
+          "aliquip ex ea commodo consequat. Duis aute irure dolor in "
+          "reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla "
+          "pariatur. Excepteur sint occaecat cupidatat non proident, sunt in "
+          "culpa qui officia deserunt mollit anim id est laborum."))
 
 
 
 (add-to-list 'load-path "~/.emacs.d/")
+
+
+
 
 
 ;;
@@ -162,6 +169,13 @@
 ;;
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/coffee-mode"))
 (require 'coffee-mode)
+
+;;
+;; Json mode
+;;
+(require 'json-mode)
+(add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
+
 ;;
 ;; Org-mode
 ;;
@@ -213,8 +227,8 @@
 ;; COLORS
 ;;
 (set-cursor-color "Red")
-(set-face-background 'region "Red")
-(set-face-background 'show-paren-match-face "Blue")
+(set-face-background 'region "Blue")
+(set-face-background 'show-paren-match-face "light blue")
 (set-face-background 'show-paren-mismatch-face "Magenta")
 (set-face-foreground 'show-paren-mismatch-face "Red")
 (set-face-foreground 'highlight "yellow")
@@ -239,6 +253,7 @@
 ;;
 ;; Fly between window
 ;;
+
 
 (windmove-default-keybindings 'meta)
 
@@ -330,7 +345,6 @@
                 (rx (group (zero-or-more (syntax whitespace))) ",") 1 1 ))
 
 ;; Ruby buinding
-
 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
