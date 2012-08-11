@@ -3,7 +3,31 @@
 ;; https://github.com/Alexandre-Strzelewicz/.emacs.d
 ;;
 
+;; Automatically save and restore sessions
+(setq desktop-dirname             "~/.emacs.d/desktop/"
+      desktop-base-file-name      "emacs.desktop"
+      desktop-base-lock-name      "lock"
+      desktop-path                (list desktop-dirname)
+      desktop-save                t
+      desktop-files-not-to-save   "^$" ;reload tramp paths
+      desktop-load-locked-desktop nil)
+(desktop-save-mode 0)
 
+(defun my-desktop ()
+  "Load the desktop and enable autosaving"
+  (interactive)
+  (let ((desktop-load-locked-desktop "ask"))
+    (desktop-read)
+    (desktop-save-mode 1)))
+
+
+
+
+
+
+;;
+;; Autocomplete for shell
+;;
 (condition-case nil (called-interactively-p 'interactive)
   (error
    ; Save reference to called-interactively-p in
@@ -15,6 +39,20 @@
    (fset 'called-interactively-p
          (lambda (&rest args)
            (inglorion-system-called-interactively-p)))))
+
+(defconst pcmpl-git-commands
+  '("add" "bisect" "branch" "checkout" "clone"
+    "commit" "diff" "fetch" "grep"
+    "init" "log" "merge" "mv" "pull" "push" "rebase"
+    "reset" "rm" "show" "status" "tag" )
+  "List of `git' commands")
+
+(defun pcomplete/git ()
+  "Completion for `git'"
+  (pcomplete-here* pcmpl-git-commands))
+ 
+
+
 
 (add-to-list 'load-path "~/.emacs.d/")
 
@@ -34,8 +72,8 @@
 ;;
 ;; shell-toggle-cd
 ;;
-(autoload 'shell-toggle-cd "~/.emacs.d/shell-toggle.el"
-  "Pops up a shell-buffer and insert a \"cd <file-dir>\" command." t)
+;; (autoload 'shell-toggle-cd "~/.emacs.d/shell-toggle.el"
+;;   "Pops up a shell-buffer and insert a \"cd <file-dir>\" command." t)
 ;;
 ;; Python mod
 ;;
@@ -49,12 +87,15 @@
 ;;
 (add-hook 'c-mode-common-hook '(lambda ()
 				 (local-set-key (kbd "RET") 'newline-and-indent)))
+
+
 ;;
-;; Save layout (revive.el)
+;; Highlight current linex
 ;;
-(autoload 'save-current-configuration "revive" "Save status" t)
-(autoload 'resume "revive" "Resume Emacs" t)
-(autoload 'wipe "revive" "Wipe Emacs" t)
+(require 'highlight-current-line)
+(highlight-current-line-on t)
+(set-face-background 'highlight-current-line-face "#111")
+
 ;;
 ;; Best JS mod (Nespresso)
 ;; 
@@ -73,10 +114,6 @@
 ;(add-to-list 'load-path (expand-file-name "~/.emacs.d/rails-minor-mode"))
 ;(require 'rails)
 
- ;; Rinari
-;; (add-to-list 'load-path "~/.emacs.d/rinari")
-;; (require 'rinari)
-
 (require 'php-mode)
 (add-to-list 'auto-mode-alist '("\\.tpl$" . php-mode))
 ;;
@@ -90,6 +127,8 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/yaml-mode"))
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
+
 ;;
 ;; HAML
 ;;
@@ -126,11 +165,11 @@
 ;;
 ;; Org-mode
 ;;
-(require 'org-install)
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-(setq org-log-done t)
+;; (require 'org-install)
+;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+;; (define-key global-map "\C-cl" 'org-store-link)
+;; (define-key global-map "\C-ca" 'org-agenda)
+;; (setq org-log-done t)
 
 ;;
 ;; Predictive
@@ -298,5 +337,7 @@
 (add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Guardfile$" . ruby-mode))
+
+(add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
 ;; We never want to edit Rubinius bytecode
 (add-to-list 'completion-ignored-extensions ".rbc")
