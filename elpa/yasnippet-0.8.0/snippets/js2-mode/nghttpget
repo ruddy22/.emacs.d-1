@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: nghttpget
+# contributor: alex strzelewicz
+# key: nghttpget
+# --
+$http.get('$1').success(function(dt) {
+		  $3
+		 }).error(function(dt, status) {
+		  $4
+		 });

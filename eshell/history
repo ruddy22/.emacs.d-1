@@ -1,0 +1,10 @@
+ll
+ll
+ll
+ll
+ll
+ll
+cd ../NodeProjects/LocalSearch
+ll
+supervisor server/app.js 
+supervisor server/app.js 

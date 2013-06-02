@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: ngcontroller
+# contributor: alex strzelewicz
+# key: ngcontroller
+# --
+function $1Controller($scope) {
+    $2
+};
+$1Controller.$inject = ['$scope'];

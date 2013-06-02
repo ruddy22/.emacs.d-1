@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: rtf
+# contributor: alex strzelewicz
+# key: rtf
+# --
+return false;

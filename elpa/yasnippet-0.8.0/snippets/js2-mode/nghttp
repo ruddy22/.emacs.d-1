@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: nghttppost
+# contributor: alex strzelewicz
+# key: $http
+# --
+$http.post('$1', { 
+  $2 
+}).success(function(dt) {
+  $3
+}).error(function(err, status) {
+  $4
+});

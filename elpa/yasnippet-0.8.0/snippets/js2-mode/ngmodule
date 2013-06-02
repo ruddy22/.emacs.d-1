@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: ngmodule
+# contributor: alex strzelewicz
+# key: ngdir
+# --
+
+var $1 = angular.module("$1", []);
+
+$1.directive('$2', function() {
+  return {
+    restrict   : 'E',
+    replace    : false,
+    transclude : true,
+    scope      : { },
+    template   : '<span ng-transclude></span>',
+    controller : ['$scope', '$element', '$attrs', function($scope, $element, $attrs) {
+    $3
+    }]}
+});

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: eres
+# contributor: alex strzelewicz
+# key: eres
+# --
+res.send($1);
