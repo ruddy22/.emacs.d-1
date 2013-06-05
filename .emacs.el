@@ -68,7 +68,7 @@
 ;;
 ;; Default message
 ;;
-(setq initial-scratch-message "Hyperloop.io custom editor")
+(setq initial-scratch-message "Unitech.io customized emacs.")
 
 ;;
 ;; IDO

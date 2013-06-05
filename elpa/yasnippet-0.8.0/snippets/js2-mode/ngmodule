@@ -1,19 +1,16 @@
 # -*- mode: snippet -*-
-# name: ngmodule
+# name: ngmod
 # contributor: alex strzelewicz
-# key: ngdir
+# key: ngmod
 # --
+/* global angular */
 
-var $1 = angular.module("$1", []);
+/**
+ * @doc module
+ * @id $1
+ * @description $1
+ *
+ * @author Alexandre Strzelewicz <as@unitech.io>
+ */
 
-$1.directive('$2', function() {
-  return {
-    restrict   : 'E',
-    replace    : false,
-    transclude : true,
-    scope      : { },
-    template   : '<span ng-transclude></span>',
-    controller : ['$scope', '$element', '$attrs', function($scope, $element, $attrs) {
-    $3
-    }]}
-});
+var ${1:moduleName} = angular.module('$1', []);
