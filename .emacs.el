@@ -34,15 +34,17 @@
 ;; COLORS
 ;;
 (set-cursor-color "Red")
-(set-face-background 'region "Red")
+(set-face-background 'region "#26d840")
 (set-face-background 'show-paren-match-face "Blue")
 (set-face-background 'show-paren-mismatch-face "Magenta")
 (set-face-foreground 'show-paren-mismatch-face "Red")
 (set-face-foreground 'highlight "yellow")
+
 ;;
 ;; MISC
 ;;
 (setq inhibit-startup-message t)
+(setq require-final-newline t)          
 (setq frame-title-format "%S: %f")
 (modify-frame-parameters nil '((wait-for-wm . nil)))
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -51,6 +53,19 @@
 (setq display-time-string-forms '((format "[%s:%s]-[%s/%s/%s] " 24-hours minutes day month year)))
 (setq scroll-preserve-screen-position t)
 (add-hook 'save-buffer-hook 'delete-trailing-whitespace)
+
+;;
+;; Smarter emacs
+;;
+
+(defadvice kill-region (before slick-cut activate compile)
+  "When called interactively with no active region, kill a single
+line instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+     (list (line-beginning-position)
+           (line-beginning-position 2)))))
+
 
 ;; 
 ;; SHORTCUTS
@@ -68,19 +83,55 @@
 ;;
 ;; Default message
 ;;
-(setq initial-scratch-message "Unitech.io customized emacs.")
+(setq initial-scratch-message "⌬ Unitech.io customized emacs")
 
 ;;
 ;; IDO
 ;;
-(setq ido-enable-flex-matching t
-      ido-auto-merge-work-directories-length nil
-      ido-create-new-buffer 'always
-      ido-use-filename-at-point 'guess
-      ido-everywhere t)
-(ido-mode 1)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ido-mode
+;; http://www.emacswiki.org/cgi-bin/wiki/InteractivelyDoThings
+(require 'ido) 
+(ido-mode 'both) ;; for buffers and files
+(setq 
+  ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
+  ido-ignore-buffers ;; ignore these guys
+  '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
+     "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
+  ido-work-directory-list '("~/" "~/Desktop" "~/Documents" "~src")
+  ido-case-fold  t                 ; be case-insensitive
+  ido-enable-last-directory-history t ; remember last used dirs
+  ido-max-work-directory-list 30   ; should be enough
+  ido-max-work-file-list      50   ; remember many
+  ido-use-filename-at-point nil    ; don't use filename at point (annoying)
+  ido-use-url-at-point nil         ; don't use url at point (annoying)
+  ido-enable-flex-matching nil     ; don't try to be too smart
+  ido-max-prospects 8              ; don't spam my minibuffer
+  ido-confirm-unique-completion t) ; wait for RET, even with unique completion
+
+;; when using ido, the confirmation is rather annoying...
+ (setq confirm-nonexistent-file-or-buffer nil)
+
+;; increase minibuffer size when ido completion is active
+(add-hook 'ido-minibuffer-setup-hook 
+  (function
+    (lambda ()
+      (make-local-variable 'resize-minibuffer-window-max-height)
+      (setq resize-minibuffer-window-max-height 1))))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (add-to-list 'load-path "~/.emacs.d/")
+
+;;
+;; Org mode
+;;
+(require 'org)
+(setq org-log-done t)
+(setq org-todo-keywords
+      '((sequence "TODO" "INPROGRESS" "DONE")))
+(setq org-todo-keyword-faces
+      '(("INPROGRESS" . (:foreground "blue" :weight bold))))
+
 
 ;;
 ;; shell-toggle-cd
@@ -311,7 +362,16 @@
 ;;
 (add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-0.8.0")
 (require 'yasnippet)
-(yas-global-mode 1)
+
+(when (require 'yasnippet nil 'noerror) ;; not: yasnippet-bundle
+  (setq yas/root-directory
+    '("~/.emacs.d/yas/")) ;; my own snippets
+  (mapc 'yas/load-directory yas/root-directory)
+  (setq yas/wrap-around-region t)
+  (setq yas/prompt-functions
+    '(yas/x-prompt yas/ido-prompt))
+  (yas/global-mode 1) ;;  make it global
+  (add-to-list 'auto-mode-alist '("yas/.*" . snippet-mode)))
 
 ;;
 ;; Emacs core fix
