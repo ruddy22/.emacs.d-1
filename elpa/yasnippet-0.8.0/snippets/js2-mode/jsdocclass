@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: jdoc
+# contributor: alex strzelewicz
+# key: jdoc
+# --
+/**
+ * $1
+ */

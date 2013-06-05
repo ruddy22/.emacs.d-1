@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: cons
+# contributor: alex strzelewicz
+# key: cons
+# --
+console.log("$1");$2

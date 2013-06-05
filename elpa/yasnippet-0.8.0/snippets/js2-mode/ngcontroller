@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: ngcontroller
+# contributor: alex strzelewicz
+# key: ngctrl
+# --
+/**
+ * @doc controller
+ * @id $1:$2
+ * 
+ * @description $3
+ * @author Alexandre Strzelewicz <as@unitech.io>
+ */
+${1:moduleName}.controller('${2:controllerName}', ['$scope', '$location', function($scope, $location) {
+    $4
+}]);

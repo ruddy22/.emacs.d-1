@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: request
+# contributor: alex strzelewicz
+# key: request
+# --
+request('$1', function(err, res, body) {
+    if (err) 
+      throw err;
+    $2
+});

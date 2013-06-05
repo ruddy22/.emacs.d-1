@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: exp
+# contributor: alex strzelewicz
+# key: exp
+# --
+expect($1).toBe$2

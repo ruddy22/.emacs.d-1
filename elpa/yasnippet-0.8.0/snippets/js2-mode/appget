@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: app.get
+# contributor: alex strzelewicz
+# key: get
+# --
+app.get('$1', function(req, res) {
+    $2
+});
