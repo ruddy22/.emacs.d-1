@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: ret
+# contributor: alex strzelewicz
+# key: ret
+# --
+return ${1:;}

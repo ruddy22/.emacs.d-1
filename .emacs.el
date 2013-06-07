@@ -70,9 +70,17 @@ line instead."
 ;; 
 ;; SHORTCUTS
 ;;
+
+(defun toggle-comment-on-line ()
+  "comment or uncomment current line"
+  (interactive)
+  (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
+
 (global-set-key (kbd "C-c g") 'goto-line)
-(global-set-key (kbd "C-c c") 'comment-region)
-(global-set-key (kbd "C-c v") 'uncomment-region)
+(global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
+(global-set-key (kbd "C-c v") 'toggle-comment-on-line)
+(global-set-key (kbd "C-c C-c") 'comment-box)
+
 (global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y")
 
 ;;
@@ -392,11 +400,11 @@ line instead."
 ;;
 ;; Test function
 ;;
-(defun doodlebug ()
- "Nonce function"
- (interactive)
- (message "Howdie-doodie fella"))
-(global-set-key [f5] 'doodlebug)
+;; (defun doodlebug ()
+;;  "Nonce function"
+;;  (interactive)
+;;  (message "Howdie-doodie fella"))
+;; (global-set-key [f5] 'doodlebug)
 
 ;;
 ;; Align C-c a

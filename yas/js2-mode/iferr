@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: iferr
+# contributor: alex strzelewicz
+# key: iferr
+# --
+if (err) return alert(err);

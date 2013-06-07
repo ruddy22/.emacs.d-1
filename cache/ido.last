@@ -2,8 +2,6 @@
 
 ;; ----- ido-last-directory-list -----
 (
- ("/home/tknew/Unitech/angular-bridge/" . "lib/")
- ("/home/tknew/WiredCraft/feathers/app/js/" . "controllers/")
  ("/home/tknew/NodeProjects/json-cms/public/" . "scripts/")
  ("/home/tknew/NodeProjects/json-cms/" . "public/")
  ("/home/tknew/NodeProjects/FS/packapp/app/app/views/_partials/" . "popups/")
@@ -180,7 +178,7 @@
  ("/home/tknew/NodeProjects/FS/server/node_modules/express-resource-new/" . "node_modules/")
  ("/home/tknew/NodeProjects/FS/server/node_modules/" . "supervisor/")
  ("/home/tknew/NodeProjects/FS/server/test/" . "fixtures/")
- ("/home/tknew/NodeProjects/FS/" . "market/")
+ ("/home/tknew/NodeProjects/FS/" . "packapp/")
  ("/home/tknew/AngularProject/bootstrap/src/modal/" . "docs/")
  ("/home/tknew/AngularProject/bootstrap/src/" . "modal/")
  ("/home/tknew/AngularProject/bootstrap/" . "src/")
@@ -256,7 +254,7 @@
  ("/home/tknew/RaspberryProject/Shanghaidict/app/" . "js/")
  ("/home/tknew/RaspberryProject/Shanghaidict/" . "app/")
  ("/home/tknew/NodeProjects/Shanghaidict/" . "app/")
- ("/home/tknew/" . "NodeProjects/")
+ ("/home/tknew/" . ".emacs.d/")
 )
 
 ;; ----- ido-work-directory-list -----
@@ -269,35 +267,21 @@
 
 ;; ----- ido-work-file-list -----
 (
- ".emacs.el"
- "app.js"
- "README.md"
- "index.js"
- "package.json"
- "main_controller.js"
- "routes.js"
+ "fixed_element.js"
  "json-cms-parser.js"
  "page.html"
  ".bashrc"
+ "routes.js"
+ "friends_tab.jade"
+ "ui_user_controller.js"
+ "forgot_password.jade"
+ "invite.jade"
+ "new_trip_tab.jade"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
- ("/home/tknew/" (20910 54531 366605 20000) "Downloads/" "Ubuntu One/" ".compiz-1/" ".goutputstream-GM2BWW" ".irssi/" ".ansible/" "manager/" "index.js" "AngularProject/" ".rnd" ".goutputstream-HKNVPW" "Screenshot from 2013-05-29 21:29:17.png" "sad-pm2.json" "Tropa de Elite (Elite Squad) 2007 720p BRRip H264 (multisubs) - antonispol/" ".goutputstream-U5Q4TW" "fs.sh" ".ICEauthority" ".gvfs/" ".yeoman/" ".z.KTJdZ5" "echo.js" ".icedtea/" "cplus.py" "Screenshot from 2013-05-29 21:32:39.png" "Screenshot from 2013-04-16 18:40:21.png" "song/" ".pam_environment" ".emacs.el~" "bitcoin/" "Screenshot from 2013-04-16 19:00:04.png" "echo-pm2.json" "Screenshot from 2013-04-15 21:55:09.png" "Screenshot from 2013-05-18 13:20:11.png" "WiredCraft/" "Screenshot from 2013-04-09 23:35:58.png" ".dbus/" "Screenshot from 2013-04-15 21:54:15.png" ".purple/" ".bitcoin/" ".sudoku/" ".rpmdb/" ".gstreamer-0.10/" "app.devo.ps/" ".pki/" ".zshrc" "Screenshot from 2013-05-28 18:56:51.png" ".goutputstream-SA8SRW" ".node-gyp/" ".goutputstream-I98IQW" "td/" ".gem/" "Screenshot from 2013-05-27 14:09:23.png" ".node_history" ".gitconfig" ".goutputstream-A8BQUW" "UIProjects/" "#13-03-20-playlist.m3u#" ".ssh/" "Screenshot from 2013-05-29 21:43:25.png" ".onboard/" ".wireshark/" "VirtualBox VMs/" ".z.NMtVJE" ".mission-control/" ".dropbox/" "nvm/" ".smex-items" ".thunderbird/" "Screenshot from 2013-05-29 21:37:46.png" ".goutputstream-1QP8UW" "RailsProject/" "toto.js" ".adobe/" ".goutputstream-6CW1RW" "Screenshot from 2013-05-29 21:35:29.png" ".nodejs-docs-cache/" "Canyoushipit_sh.pdf" "---playlist.m3u" ".gimp-2.6/" ".config/" ".bower/" "Screenshot from 2013-04-15 17:17:10.png" "Vagrant/" "trackanalyzer/" ".goutputstream-2QKYVW" ".macromedia/" ".gconf/" "Desktop/" ".docpad.cson" "test.js" ".gitk" ".goutputstream-FBLOVW" ".avidemux/" "thailande/" "Screenshot from 2013-04-24 12:42:18.png" ".goutputstream-254UQW" ".log/" ".pulse-cookie" "Screenshot from 2013-05-29 21:32:38.png" ".goutputstream-AXO3RW" "ido.el" ".lesshst" "Mixxx/" ".dmrc" "FrontProjects/" ".ido.last" "Projects/" "Dropbox/" ".subversion/" "index.html" ".shotwell/" "scan" ".vagrant.d/" ".fontconfig/" "angular.min.tmp.js" ".goutputstream-J2GEXW" "Screenshot from 2013-04-29 01:50:05.png" ".dropbox-dist/" ".ido.last~" ".rvm/" "Screenshot from 2013-05-29 21:35:26.png" ".cache/" "Vagrantfile.json" ".irb-history" "setup.sh" ".bash_logout" "canal" "Screenshot from 2013-05-29 21:35:28.png" "Screenshot from 2013-05-05 21:05:43.png" ".gtk-bookmarks" "Screenshot from 2013-05-29 21:35:30.png" "Screenshot from 2013-05-29 21:32:15.png" "Screenshot from 2013-04-22 22:25:50.png" ".erlang.cookie" ".vagrant/" ".VirtualBox/" ".mixxx/" "root@thewinedrop.com" ".npm/" ".xscreensaver" "tmp_no_work.js" "Screenshot from 2013-05-29 21:28:41.png" ".pip/" "Screenshot from 2013-04-29 19:34:41.png" ".gegl-0.0/" ".gnome2_private/" "Screenshot from 2013-05-29 21:39:46.png" ".grunt-init/" ".forever/" "pi@192.168.182" ".xsession-errors" ".scriptedrc/" "Screenshot from 2013-05-29 21:32:14.png" "root@unitech" "Screenshot from 2013-05-29 21:31:38.png" ".goutputstream-FLNPSW" "Screenshot from 2013-04-07 15:21:40.png" ".rediscli_history" "Tweecket/" ".mozilla/" ".vagrant-lock" "NodeProjects/" ".goutputstream-C0H1PW" ".local/" "ApplinessMay2013.pdf" "yo1/" "feedback.md" ".emacs.el" "13-03-20-playlist.m3u" "Screenshot from 2013-05-29 21:28:43.png" "Webcam/" "Screenshot from 2013-05-29 21:29:16.png" ".tilda/" ".audacity-data/" ".emacs.bckp/" ".Skype/" "Screenshot from 2013-04-18 19:40:41.png" "Songs/" ".npmrc" "package.json" "Screenshot from 2013-05-29 21:32:16.png" ".bash_history" ".zcompdump" ".pulse/" ".thumbnails/" "IMG_28042013_172934.png" "logmanClient.js" ".goutputstream-8YKZOW" ".emacs.d/" ".z" "MobileProject/" "Screenshot from 2013-03-09 17:30:14.png" ".profile" ".pm2/" "FS2/" ".bashrc" ".Xauthority" "tmp/" "music spl/" ".xsession-errors.old" ".jackdrc" "ansible_hosts" ".mysql_history" "Screenshot from 2013-05-23 18:52:15.png" ".guard_history" ".face" "Vagrantfile" "Screenshot from 2013-04-16 03:04:33.png" ".goutputstream-T8NERW" ".cplus/" "Screenshot from 2013-04-22 22:25:34.png" "Screenshot from 2013-05-29 21:36:43.png" "toto-pm2.json" ".goutputstream-4WK3PW" ".goutputstream-AB0IXW" ".dbshell" "Unitech/" ".gnome2/" "../" "./")
-
- ("/home/tknew/NodeProjects/FS/market/" (20905 61466 21620 393000) "app.js" ".sass-cache/" "locals.json" "scss/" "Gruntfile.js" "node_modules/" "../" "tmp.json" "views/" "public/" "package.json" "./" "locals.json.bckp")
-
- ("/home/tknew/NodeProjects/" (20908 23525 478926 424000) "uptime/" "grunt-init/" "FSclassic/" "Hear/" "instant/" "APIs/" "authom/" "mount/" "StartupTrends/" "AssemblageBin/" "pm2/" "stream/" "experimental8/" "ArrayFind/" "LocalSearchUX1/" "express-repl/" "charm/" "ha-ia-ecg.js/" "express-load/" "process-manager/" "Haibu/" "icnf/" "BeatsSearcher/" "speak.js/" "Speak/" "Fangular/" "FS/" "Godot/" "playin/" "elastic/" "DeportedChat/" "LocalSearch/" ".gitignore" "Shanghaidict2/" "pm2.tar.gz" "Snippets/" "computer-expose/" "LocalSearchUX2/" "express-angular/" "geo_local/" "monitMiddleware/" "hoodie.js/" "Kairos/" "geonames_local/" "Enyo/" "Assemblage/" "../" "zurb-foundation.docpad/" "website_train/" "angular-bridge/" "wrk/" "experimental/" "Harmony/" "express-resource-new/" "./" "angularAuth/" "tmp/" "Term/" "BusinessNewsWatcher/" "Shanghaidict/" "SocialImpact/" "json-cms/")
-
- ("/home/tknew/Unitech/" (20910 44809 626381 44000) "poc/" "FriendBrotha.js/" "Noogle/" "pm2/" "Landingpage/" "YFMM-Editor/" "Blog/" "Ngmodule/" "HNizer/" "../" "angular-bridge/" "./")
-
- ("/home/tknew/Unitech/angular-bridge/" (20910 46154 484811 912000) "index.js" ".npmignore" "README.md" "lib/" ".gitignore" ".git/" "../" "package.json" "test/" "./")
-
- ("/home/tknew/Unitech/angular-bridge/lib/" (20910 45358 237456 113000) "index.js" "../" "./")
-
- ("/home/tknew/WiredCraft/feathers/app/js/" (20910 44384 753118 244000) "controllers/" "filters.js" "services/" "../" "routes.js" "directives/" "./" "factories/")
-
- ("/home/tknew/WiredCraft/feathers/app/js/controllers/" (20910 44359 145413 786000) "main_controller.js" "../" "./")
+ ("/home/tknew/WiredCraft/app.devo.ps/app/js/directives/" (20905 58848 976524 820000) "foundascular.js" "fixed_element.js" "../" "knob.js" "server_directives.js" "./" "ux.js")
 
  ("/home/tknew/NodeProjects/json-cms/public/scripts/" (20908 23540 46712 969000) "json-cms-parser.js" "../" "./")
 
@@ -306,6 +290,8 @@
  ("/home/tknew/NodeProjects/json-cms/public/" (20908 23540 46712 969000) "scripts/" "styles/" "index.html" "../" "./" "html/")
 
  ("/home/tknew/NodeProjects/json-cms/" (20908 23736 200117 518000) "server.js" "auth.js" "README.md" ".gitignore" "testing.js" ".git/" "node_modules/" "../" "routes.js" "models.js" "public/" "package.json" "./" "config.template.js")
+
+ ("/home/tknew/" (20907 22069 424765 813000) "Downloads/" "Ubuntu One/" ".compiz-1/" ".goutputstream-GM2BWW" ".irssi/" ".ansible/" "manager/" "index.js" "AngularProject/" ".rnd" ".goutputstream-HKNVPW" "Screenshot from 2013-05-29 21:29:17.png" "sad-pm2.json" ".goutputstream-U5Q4TW" "fs.sh" ".ICEauthority" ".gvfs/" ".yeoman/" ".z.KTJdZ5" "echo.js" ".icedtea/" "cplus.py" "Screenshot from 2013-05-29 21:32:39.png" "Screenshot from 2013-04-16 18:40:21.png" "song/" ".pam_environment" ".emacs.el~" "bitcoin/" "Screenshot from 2013-04-16 19:00:04.png" "echo-pm2.json" "Screenshot from 2013-04-15 21:55:09.png" "Screenshot from 2013-05-18 13:20:11.png" "WiredCraft/" "Screenshot from 2013-04-09 23:35:58.png" ".dbus/" "Screenshot from 2013-04-15 21:54:15.png" ".purple/" ".bitcoin/" ".sudoku/" ".rpmdb/" ".gstreamer-0.10/" "app.devo.ps/" ".pki/" ".zshrc" "Screenshot from 2013-05-28 18:56:51.png" ".goutputstream-SA8SRW" ".node-gyp/" ".goutputstream-I98IQW" "td/" ".gem/" "Screenshot from 2013-05-27 14:09:23.png" ".node_history" ".gitconfig" ".goutputstream-A8BQUW" "UIProjects/" "#13-03-20-playlist.m3u#" ".ssh/" "Screenshot from 2013-05-29 21:43:25.png" ".onboard/" ".wireshark/" "VirtualBox VMs/" ".z.NMtVJE" ".mission-control/" ".dropbox/" "nvm/" ".smex-items" ".thunderbird/" "Screenshot from 2013-05-29 21:37:46.png" ".goutputstream-1QP8UW" "RailsProject/" "toto.js" ".adobe/" ".goutputstream-6CW1RW" "Screenshot from 2013-05-29 21:35:29.png" ".nodejs-docs-cache/" "---playlist.m3u" ".gimp-2.6/" ".config/" ".bower/" "Screenshot from 2013-04-15 17:17:10.png" "Vagrant/" "trackanalyzer/" ".goutputstream-2QKYVW" ".macromedia/" ".gconf/" "Desktop/" ".docpad.cson" "test.js" ".gitk" ".goutputstream-FBLOVW" ".avidemux/" "thailande/" "Screenshot from 2013-04-24 12:42:18.png" ".goutputstream-254UQW" ".log/" ".pulse-cookie" "Screenshot from 2013-05-29 21:32:38.png" ".goutputstream-AXO3RW" ".lesshst" "Mixxx/" ".dmrc" "FrontProjects/" ".ido.last" "Projects/" "Dropbox/" ".subversion/" "index.html" ".shotwell/" "scan" ".vagrant.d/" ".fontconfig/" "angular.min.tmp.js" ".goutputstream-J2GEXW" "Screenshot from 2013-04-29 01:50:05.png" ".dropbox-dist/" ".ido.last~" ".rvm/" "Screenshot from 2013-05-29 21:35:26.png" ".cache/" "Vagrantfile.json" ".irb-history" "setup.sh" ".bash_logout" "canal" "Screenshot from 2013-05-29 21:35:28.png" "Screenshot from 2013-05-05 21:05:43.png" ".gtk-bookmarks" "Screenshot from 2013-05-29 21:35:30.png" "Screenshot from 2013-05-29 21:32:15.png" "Screenshot from 2013-04-22 22:25:50.png" ".erlang.cookie" ".vagrant/" ".VirtualBox/" ".mixxx/" "root@thewinedrop.com" ".npm/" ".xscreensaver" "tmp_no_work.js" "Screenshot from 2013-05-29 21:28:41.png" ".pip/" "Screenshot from 2013-04-29 19:34:41.png" ".gegl-0.0/" ".gnome2_private/" "Screenshot from 2013-05-29 21:39:46.png" ".grunt-init/" ".forever/" "pi@192.168.182" ".xsession-errors" ".scriptedrc/" "Screenshot from 2013-05-29 21:32:14.png" "root@unitech" "Screenshot from 2013-05-29 21:31:38.png" ".goutputstream-FLNPSW" "Screenshot from 2013-04-07 15:21:40.png" ".rediscli_history" "Tweecket/" ".mozilla/" ".vagrant-lock" "NodeProjects/" ".goutputstream-C0H1PW" ".local/" "ApplinessMay2013.pdf" "yo1/" "feedback.md" ".emacs.el" "13-03-20-playlist.m3u" "Screenshot from 2013-05-29 21:28:43.png" "Webcam/" "Screenshot from 2013-05-29 21:29:16.png" ".tilda/" ".audacity-data/" ".Skype/" "Screenshot from 2013-04-18 19:40:41.png" "Songs/" ".npmrc" "package.json" "Screenshot from 2013-05-29 21:32:16.png" ".bash_history" ".zcompdump" ".pulse/" ".thumbnails/" "IMG_28042013_172934.png" "logmanClient.js" ".goutputstream-8YKZOW" ".emacs.d/" ".z" "MobileProject/" "Screenshot from 2013-03-09 17:30:14.png" ".profile" ".pm2/" "FS2/" ".bashrc" ".Xauthority" "tmp/" "music spl/" ".xsession-errors.old" ".jackdrc" "ansible_hosts" ".mysql_history" "Screenshot from 2013-05-23 18:52:15.png" ".guard_history" ".face" "Vagrantfile" "Screenshot from 2013-04-16 03:04:33.png" ".goutputstream-T8NERW" ".cplus/" "Screenshot from 2013-04-22 22:25:34.png" "Screenshot from 2013-05-29 21:36:43.png" "toto-pm2.json" ".goutputstream-4WK3PW" ".goutputstream-AB0IXW" ".dbshell" "Unitech/" ".gnome2/" "../" "./")
 
  ("/home/tknew/.emacs.d/" (20905 61057 184764 104000) "ac/" "js-doc.el" "el-get/" "python-mode.el" "mwe-color-box.el" "js3-mode.el" "README.markdown" "linum.el" "shell-toggle.el" "auto-save-list/" "elpa/" "htmlize.el" "markdown-mode/" "tabbar.el" "auto-complete-1.4/" "lintnode/" "nodejs-repl.el" "ido.el" "popup-0.5/" "espresso.el" "coffee-mode/" "ac-comphist.dat" "fuzzy.elc" "rhtml-minor-mode/" "popup.elc" "revive.el" "highlight-current-line.el" ".git/" "rails-minor-mode/" "auto-complete-yasnippet.el" "nodrepl/" "haml-mode/" "../" ".emacs.el" "eshell/" "js3-mode.elc" "popup.el" "z/" "yaml-mode/" "#README.markdown#" "fuzzy.el" "./" "php-mode.el" "rinari/" "ac-dict/" "sass-mode/" "jade-mode/" "sr-speedbar.el" "flymake-cursor.el")
 
@@ -328,8 +314,6 @@
  ("/home/tknew/.emacs.d/elpa/yasnippet-0.8.0/snippets/js2-mode/" (20905 59065 958885 426000) "nghttp" "it" "require" "ngmodule" "function" "retfalse" "console" "test.js" "request" "ngcontroller" "expect" "jsdocclass" "../" "appget" "eres" "each" "./" "describe" "nghttpget")
 
  ("/home/tknew/NodeProjects/FS/packapp/app/app/scripts/directives/" (20898 58336 28206 648000) "directive_upload.js" "directive_autocomplete.js" "../" "ng-upload.js" "./")
-
- ("/home/tknew/WiredCraft/app.devo.ps/app/js/directives/" (20905 58756 279773 165000) "foundascular.js" "fixed_element.js" "#fixed_element.js#" ".#fixed_element.js" "../" "knob.js" "server_directives.js" "./" "ux.js")
 
  ("/home/tknew/NodeProjects/FS/packapp/" (20905 54110 675013 54000) "index.html" "app/" "admin/" "../" "./" "tmp/")
 
@@ -393,9 +377,13 @@
 
  ("/home/tknew/WiredCraft/app.devo.ps/app/css/" (20902 51786 834277 358000) "main.css" "lmain.css" "variables.css" "../" "./" "rickshaw.min.css")
 
+ ("/home/tknew/NodeProjects/" (20901 53783 855152 836000) "uptime/" "grunt-init/" "FSclassic/" "Hear/" "instant/" "APIs/" "authom/" "express/" "mount/" "StartupTrends/" "AssemblageBin/" "pm2/" "stream/" "experimental8/" "ArrayFind/" "LocalSearchUX1/" "express-repl/" "charm/" "ha-ia-ecg.js/" "express-load/" "process-manager/" "Haibu/" "icnf/" "BeatsSearcher/" "speak.js/" "Speak/" "Fangular/" "FS/" "Godot/" "playin/" "elastic/" "DeportedChat/" "LocalSearch/" ".gitignore" "Shanghaidict2/" "pm2.tar.gz" "Snippets/" "computer-expose/" "LocalSearchUX2/" "express-angular/" "geo_local/" "monitMiddleware/" "hoodie.js/" "Kairos/" "geonames_local/" "Enyo/" "Assemblage/" "../" "zurb-foundation.docpad/" "website_train/" "angular-bridge/" "wrk/" "experimental/" "Harmony/" "express-resource-new/" "./" "angularAuth/" "tmp/" "Term/" "BusinessNewsWatcher/" "Shanghaidict/" "SocialImpact/")
+
  ("/home/tknew/WiredCraft/app.devo.ps/app/js/factories/" (20902 51786 834277 358000) "server_factory.js" "user_factory.js" "../" "profile_factory.js" "./")
 
  ("/home/tknew/Unitech/pm2/apps/" (20902 3808 793399 862000) "no-name-echo.json" "multi-pm2.json" "echo-pm2.json" "cluster-pm2.json" "default-path-echo.json" "../" "auto-kill-echo.json" "./")
+
+ ("/home/tknew/Unitech/" (20902 309 777076 174000) "FriendBrotha.js/" "Noogle/" "pm2/" "Landingpage/" "Blog/" "Ngmodule/" "HNizer/" "../" "Noogle.tar.gz" "./")
 
  ("/home/tknew/Unitech/pm2/test/fixtures/" (20902 3707 586968 265000) "multi-echo.json" "server.js" "echo.js" "echo-to-pm2.json" "echo-pm2.json" "cluster-pm2.json" "echoto-pm2.json" "child.js" "../" "./")
 
@@ -482,6 +470,16 @@
  ("/home/tknew/experimental/apps/" (20891 18983 90708 687000) "no-name-echo.json" "multi-pm2.json" "echo-pm2.json" "cluster-pm2.json" "default-path-echo.json" "../" "auto-kill-echo.json" "./")
 
  ("/home/tknew/experimental/lib/" (20891 15552 505565 101000) "sample.json" "logger.js" "Log.js" "monit.js" "cli-ux.js" "../" "./" "web-interface.js")
+
+ ("/home/tknew/experimental/examples/" (20891 16215 690878 146000) "echokill.js" "echo.js" "child.js" "../" "./")
+
+ ("/home/tknew/experimental/test/" (20891 14274 201039 978000) "cli.sh" "mocha.opts" "satan.mocha.js" "fixtures/" "../" "god.mocha.js" "./" "monit.mocha.js")
+
+ ("/home/tknew/experimental/node_modules/" (20891 10432 576569 648000) "cli-table/" "better-assert/" "mocha/" "should/" "watch/" "multimeter/" "axon-rpc/" "debug/" "commander/" ".bin/" "axon/" "async/" "multimeter-stack/" "../" "./" "usage/")
+
+ ("/home/tknew/experimental/node_modules/multimeter/node_modules/" (20891 10478 988999 608000) "charm/" "../" "./")
+
+ ("/home/tknew/experimental/node_modules/multimeter/node_modules/charm/" (20891 10479 20999 904000) "index.js" "README.markdown" "example/" "lib/" "../" "package.json" "./")
 )
 
 ;; ----- ido-unc-hosts-cache -----

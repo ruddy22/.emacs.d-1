@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: ngfactory
+# contributor: alex strzelewicz
+# key: ngfactory
+# --
+/**
+ * @doc service
+ * @id $1:$2
+ * 
+ * @description $3
+ * @author Alexandre Strzelewicz <as@unitech.io>
+ */
+${1:moduleName}.factory('${2:serviceName}', ['$scope', function($scope) {
+    var ${2:serviceName} = {};
+
+    ${2:serviceName}.init = function() {
+      $4
+    };
+
+    return ${2:serviceName};
+}]);

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: ngservice
+# contributor: alex strzelewicz
+# key: ngservice
+# --
+/**
+ * @doc module
+ * @id $1:$2
+
+ * @description $3
+ */
+${1:moduleName}.service('${2:serviceName}', ['$http', function($http) {
+    this.init = function() {
+      $4
+    };
+}]);
