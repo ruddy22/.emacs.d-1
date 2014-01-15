@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: swaggerheader
+# contributor: alex strzelewicz
+# key: swaggerheader
+# --
+/**
+ * @swagger
+ * resourcePath: $1
+ * description: $2
+ */

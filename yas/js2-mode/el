@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: elc
+# contributor: alex strzelewicz
+# key: elc
+# --
+element('$1').click();

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: find
+# contributor: alex strzelewicz
+# key: find
+# --
+var q = $1.find({$2}, '$3');
+q.execFind(function(err, _res) {
+  if (err) return res.send(500, err);
+  return res.send(_res);
+});

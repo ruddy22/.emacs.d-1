@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: script
+# contributor: alex strzelewicz
+# key: script
+# --
+<script src="$1"></script>$2

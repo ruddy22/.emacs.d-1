@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: jsclass
+# contributor: alex strzelewicz
+# key: jsclass
+# --
+$1 = (function(){
+  function cls() {
+    var name = '';
+
+    var obj = {
+      publicField : 0,
+      getName: function(){return name;}
+    };
+
+    return obj;
+  }
+
+  return cls;
+})();
+
+john = $1();     // no new needed
+mary = new $1(); // doesn't hurt, but less efficientx
+
+module.exports = $1;

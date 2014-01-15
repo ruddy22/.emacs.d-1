@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: btn
+# contributor: alex strzelewicz
+# key: btn
+# --
+<button type="button" class="btn btn-default">$1</button>

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: swaggermodel
+# contributor: alex strzelewicz
+# key: swaggermodel
+# --
+/**
+ * @swagger
+ * models:
+ *   User:
+ *     id: User
+ *     properties:
+ *       username:
+ *         type: String
+ *       password:
+ *         type: String
+ */

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: deferred
+# contributor: alex strzelewicz
+# key: deferred
+# --
+var deferred = $q.defer();
+deferred.resolve(data); 
+deferred.reject(err);
+return deferred.promise;

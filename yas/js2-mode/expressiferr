@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: expressiferr
+# contributor: alex strzelewicz
+# key: expressiferr
+# --
+if (err) return res.send(500, err);
+return res.send($1);

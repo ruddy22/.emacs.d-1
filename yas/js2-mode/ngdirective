@@ -10,7 +10,7 @@
  * @description $3
  * @author Alexandre Strzelewicz <as@unitech.io>
  */
-${1:moduleName}.directive('${2:directiveName}', ['$http', function($http) {                                              
+${1:moduleName}.directive('${2:directiveName}', ['$http', function($http) {   
     var $2 = {
       	restrict : 'E',
 	replace : true,

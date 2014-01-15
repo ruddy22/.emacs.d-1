@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: jsdocheader
+# contributor: alex strzelewicz
+# key: jsdocheader
+# --
+/**
+ * @file ${1:What the file is for?}
+ * @author Alexandre Strzelewicz <as@unitech.io>
+ * @project $2
+ */

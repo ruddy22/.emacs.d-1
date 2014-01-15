@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: cmts
+# contributor: alex strzelewicz
+# key: cmts
+# --
+/**
+ * @description ${1:description}
+ *
+ * @api ${2:variableName}
+ */${7}

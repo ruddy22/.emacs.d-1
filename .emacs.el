@@ -1,17 +1,26 @@
 
 ;;
-;; Configured by Strzelewicz Alexandre 
+;; Configured by Strzelewicz Alexandre
 ;; https://github.com/Alexandre-Strzelewicz/.emacs.d
 ;;
 
 
+;(setq auto-save-interval 10)            ;击键10次保存
+;(setq auto-save-timeout 1)              ;空闲1秒时就保存
+;(setq auto-save-visited-file-name t)
 
-;; ;; Require Emacs' package functionality
-;; (require 'package)
-;; ;; Add the Melpa repository to the list of package sources
-;; (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-;; ;; Initialise the package system.
-;; (package-initialize)
+
+;; (split-window-horizontally)
+;; (save-selected-window
+;;   (other-window 1)
+;;   (switch-to-buffer nil))
+
+;; Require Emacs' package functionality
+(require 'package)
+;; Add the Melpa repository to the list of package sources
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;; Initialise the package system.
+(package-initialize)
 ;; (require 'graphene)
 
 
@@ -21,6 +30,8 @@
 ;; DISABLE BACKUP FILES
 ;;
 (setq make-backup-files nil)
+(setq backup-directory-alist `(("." . "~/.saves")))
+
 (setq delete-auto-save-files t)
 (global-font-lock-mode t)
 (setq-default indicate-empty-lines t)
@@ -44,7 +55,7 @@
 ;; MISC
 ;;
 (setq inhibit-startup-message t)
-(setq require-final-newline t)          
+(setq require-final-newline t)
 (setq frame-title-format "%S: %f")
 (modify-frame-parameters nil '((wait-for-wm . nil)))
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -53,6 +64,12 @@
 (setq display-time-string-forms '((format "[%s:%s]-[%s/%s/%s] " 24-hours minutes day month year)))
 (setq scroll-preserve-screen-position t)
 (add-hook 'save-buffer-hook 'delete-trailing-whitespace)
+
+;;
+;; Nicer file
+;;
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 
 ;;
 ;; Smarter emacs
@@ -67,7 +84,7 @@ line instead."
            (line-beginning-position 2)))))
 
 
-;; 
+;;
 ;; SHORTCUTS
 ;;
 
@@ -99,9 +116,9 @@ line instead."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ido-mode
 ;; http://www.emacswiki.org/cgi-bin/wiki/InteractivelyDoThings
-(require 'ido) 
+(require 'ido)
 (ido-mode 'both) ;; for buffers and files
-(setq 
+(setq
   ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
   ido-ignore-buffers ;; ignore these guys
   '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
@@ -121,7 +138,7 @@ line instead."
  (setq confirm-nonexistent-file-or-buffer nil)
 
 ;; increase minibuffer size when ido completion is active
-(add-hook 'ido-minibuffer-setup-hook 
+(add-hook 'ido-minibuffer-setup-hook
   (function
     (lambda ()
       (make-local-variable 'resize-minibuffer-window-max-height)
@@ -129,16 +146,20 @@ line instead."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (add-to-list 'load-path "~/.emacs.d/")
+;;
+;; nginxmode
+;;
+(require 'nginx-mode)
 
 ;;
 ;; Org mode
 ;;
-(require 'org)
-(setq org-log-done t)
-(setq org-todo-keywords
-      '((sequence "TODO" "INPROGRESS" "DONE")))
-(setq org-todo-keyword-faces
-      '(("INPROGRESS" . (:foreground "blue" :weight bold))))
+;; (require 'org)
+;; (setq org-log-done t)
+;; (setq org-todo-keywords
+;;       '((sequence "TODO" "INPROGRESS" "DONE")))
+;; (setq org-todo-keyword-faces
+;;       '(("INPROGRESS" . (:foreground "blue" :weight bold))))
 
 
 ;;
@@ -169,9 +190,9 @@ line instead."
 
 
 ;;
-;; JS2MOD
+;; Binding
 ;;
-
+(add-to-list 'auto-mode-alist '("\\.ejs$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-hook 'js-mode-hook 'js2-minor-mode)
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
@@ -207,7 +228,6 @@ line instead."
 (setq js2-use-font-lock-faces t)
 
 
-
 ;;
 ;; Rinari
 ;;
@@ -220,6 +240,10 @@ line instead."
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/rhtml-minor-mode"))
 (require 'rhtml-mode)
 
+
+
+(require 'hackernews)
+
 ;;
 ;; YAML
 ;;
@@ -231,6 +255,13 @@ line instead."
 ;;
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/haml-mode"))
 (require 'haml-mode)
+
+;;
+;; HBS
+;;
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.hbs$" . web-mode))
+
 
 ;;
 ;; SASS
@@ -251,6 +282,7 @@ line instead."
 ;;
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/coffee-mode"))
 (require 'coffee-mode)
+(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 
 ;;
 ;; Resize window
@@ -393,7 +425,7 @@ line instead."
 ;;
 (add-to-list 'load-path "~/.emacs.d/jade-mode")
 (require 'sws-mode)
-(require 'jade-mode)    
+(require 'jade-mode)
 (add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
 (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
 
@@ -418,39 +450,6 @@ line instead."
 
 (global-set-key (kbd "C-c a") 'my-align-single-equals)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-;;(require 'nodejs-repl)
-
-;; (add-to-list 'load-path "~/.emacs.d/lintnode")
-;; (require 'flymake-jslint)
-;; ;; Make sure we can find the lintnode executable
-;; (setq lintnode-location "~/.emacs.d/lintnode")
-;; ;; JSLint can be... opinionated
-;; (setq lintnode-jslint-excludes (list 'nomen 'undef 'plusplus 'onevar 'white))
-;; ;; Start the server when we first open a js file and start checking
-;; (add-hook 'js2-mode-hook
-;;           (lambda ()
-;;             (lintnode-hook)))
-
-
 ;;
 ;; el-get
 ;;
@@ -470,19 +469,19 @@ line instead."
 ;; js-commint
 ;;
 
-(require 'js-comint) 
+(require 'js-comint)
 (setq inferior-js-program-command "node") ;; not "node-repl"
 ;; Use your favorited js mode here:
-(add-hook 'js2-mode-hook '(lambda () 
-                            (local-set-key "\C-x\C-e" 
+(add-hook 'js2-mode-hook '(lambda ()
+                            (local-set-key "\C-x\C-e"
                                            'js-send-last-sexp)
-                            (local-set-key "\C-\M-x" 
+                            (local-set-key "\C-\M-x"
                                            'js-send-last-sexp-and-go)
-                            (local-set-key "\C-cb" 
+                            (local-set-key "\C-cb"
                                            'js-send-buffer)
-                            (local-set-key "\C-c\C-b" 
+                            (local-set-key "\C-c\C-b"
                                            'js-send-buffer-and-go)
-                            (local-set-key "\C-cl" 
+                            (local-set-key "\C-cl"
                                 'js-load-file-and-go)
                             ))
 
@@ -508,6 +507,17 @@ line instead."
  '(js3-indent-on-enter-key t)
  '(js3-indent-dots t)
 )
- 
+
 (require 'flymake-cursor)
 
+(require 'php-mode)
+
+;;
+;; Alias
+;;
+(defalias 'pipe 'shell-command-on-region)
+
+
+(defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
+  "Prevent annoying \"Active processes exist\" query when you quit Emacs."
+  (flet ((process-list ())) ad-do-it))

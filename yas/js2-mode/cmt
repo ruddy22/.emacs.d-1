@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: cmt
+# contributor: alex strzelewicz
+# key: cmt
+# --
+/**
+ * ${1:description}
+ *
+ * @param {${2:type}} ${3:variableName}
+ * @return {${4:type}} ${5:variableName}
+ * @api ${6:variableName}
+ */
+$7

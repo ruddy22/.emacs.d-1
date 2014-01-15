@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: exports
+# contributor: alex strzelewicz
+# key: exports
+# --
+
+/**
+ * $1
+ */
+
+exports.$2 = function(req, res) {
+  $3
+};

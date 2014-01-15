@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: in
+# contributor: alex strzelewicz
+# key: in
+# --
+input('$1').enter('$2');

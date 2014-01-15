@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: fn
+# contributor: alex strzelewicz
+# key: fn
+# --
+function($1) { $2  
+  return false;
+};

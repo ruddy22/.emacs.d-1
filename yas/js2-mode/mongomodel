@@ -1,0 +1,43 @@
+# -*- mode: snippet -*-
+# name: mongomodel
+# contributor: alex strzelewicz
+# key: mongomodel
+# --
+
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema, ObjectID = Schema.ObjectId;
+
+var $1Schema = new Schema({
+  user : {
+    type : ObjectID,
+    ref : 'User',
+    required : true,
+    index : true
+  },
+  name : {type : String, required : true},
+  updated_at : { type : Date, default : Date.now },
+  created_at : { type : Date, default : Date.now }
+});
+
+$1Schema.pre('save', function(next) {
+  if (this.isNew) {
+    // first time the object is created
+    return next();
+  }
+  this.updated_at = Date.now();
+  next();
+});
+
+$1Schema.statics.findByName = function(name, cb) {
+  return this.find({name : name}, cb);
+};
+
+// BlogPost.methods.findCreator = function (callback) {
+//   return this.db.model('Person').findById(this.creator, callback);
+// }
+
+var $1 = mongoose.model('$1', $1Schema);
+
+module.exports = function(app) {
+  return $1;
+};
