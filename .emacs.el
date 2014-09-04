@@ -10,6 +10,7 @@
 ;(setq auto-save-visited-file-name t)
 
 
+
 ;; (split-window-horizontally)
 ;; (save-selected-window
 ;;   (other-window 1)
@@ -21,6 +22,7 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 ;; Initialise the package system.
 (package-initialize)
+
 ;; (require 'graphene)
 
 
@@ -108,7 +110,7 @@ line instead."
 ;;
 ;; Default message
 ;;
-(setq initial-scratch-message "⌬ Unitech.io customized emacs")
+(setq initial-scratch-message "⌬ keymetrics.io pimped emacs")
 
 ;;
 ;; IDO
@@ -521,3 +523,8 @@ line instead."
 (defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
   "Prevent annoying \"Active processes exist\" query when you quit Emacs."
   (flet ((process-list ())) ad-do-it))
+
+(setq-default tab-width 2)
+
+(require 'dtrt-indent)
+(dtrt-indent-mode 1)

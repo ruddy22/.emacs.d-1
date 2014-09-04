@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: async
+# contributor: alex strzelewicz
+# key: async
+# --
+async.eachLimit(${1:array}, ${2:concurrent_actions}, function(proc, next) {
+  return next();
+}, function(err) {
+  if (err) return cb(new Error(err));
+  return cb(null, {success:true});
+});
