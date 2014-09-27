@@ -81,9 +81,9 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 
-(add-to-list 'load-path "~/.emacs.d/autopair")
-(require 'autopair)
-(autopair-global-mode)
+;; (add-to-list 'load-path "~/.emacs.d/autopair")
+;; (require 'autopair)
+;; (autopair-global-mode)
 
 ;;
 ;; Smarter emacs
@@ -219,28 +219,28 @@ line instead."
 (add-hook 'js2-mode-hook '(lambda ()
                             (local-set-key (kbd "RET") 'newline-and-indent)
                             ))
-(eval-after-load "autopair-autoloads"
-  '(progn
-     (require 'autopair)))
+;; (eval-after-load "autopair-autoloads"
+;;   '(progn
+;;      (require 'autopair)))
 
-(eval-after-load "autopair"
-  '(progn
-     (autopair-global-mode 1)
+;; (eval-after-load "autopair"
+;;   '(progn
+;;      (autopair-global-mode 1)
 
-     (setq my-autopair-off-modes '(
-                                   ;; js2-mode
-                                   ))
-     (dolist (m my-autopair-off-modes)
-       (add-hook (intern (concat (symbol-name m) "-hook"))
-                 #'(lambda () (setq autopair-dont-activate t))))
-     ))
+;;      (setq my-autopair-off-modes '(
+;;                                    ;; js2-mode
+;;                                    ))
+;;      (dolist (m my-autopair-off-modes)
+;;        (add-hook (intern (concat (symbol-name m) "-hook"))
+;;                  #'(lambda () (setq autopair-dont-activate t))))
+;;      ))
 
-(eval-after-load "js2-mode"
-  '(progn
-     (if (and (boundp 'my-autopair-off-modes)
-              (not (memq 'js2-mode my-autopair-off-modes)))
-         (setq js2-mirror-mode nil))
-     ))
+;; (eval-after-load "js2-mode"
+;;   '(progn
+;;      (if (and (boundp 'my-autopair-off-modes)
+;;               (not (memq 'js2-mode my-autopair-off-modes)))
+;;          (setq js2-mirror-mode nil))
+;;      ))
 
 
 (eval-after-load "js2-mode"
