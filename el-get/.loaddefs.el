@@ -4,8 +4,9 @@
 
 
 ;;;### (autoloads (el-get-checksum el-get-make-recipes el-get-cd
-;;;;;;  el-get-self-update el-get-update-all el-get-version) "el-get/el-get"
-;;;;;;  "el-get/el-get.el" (20889 64721 357461 796000))
+;;;;;;  el-get-self-update el-get-update-packages-of-type el-get-update-all
+;;;;;;  el-get-version) "el-get/el-get" "el-get/el-get.el" (21542
+;;;;;;  58994 162676 98000))
 ;;; Generated autoloads from el-get/el-get.el
 
 (autoload 'el-get-version "el-get/el-get" "\
@@ -17,6 +18,11 @@ Message the current el-get version
 Performs update of all installed packages.
 
 \(fn &optional NO-PROMPT)" t nil)
+
+(autoload 'el-get-update-packages-of-type "el-get/el-get" "\
+Update all installed packages of type TYPE.
+
+\(fn TYPE)" t nil)
 
 (autoload 'el-get-self-update "el-get/el-get" "\
 Update el-get itself.  The standard recipe takes care of reloading the code.
@@ -42,7 +48,7 @@ Compute the checksum of the given package, and put it in the kill-ring
 ;;;***
 
 ;;;### (autoloads (el-get-list-packages) "el-get/el-get-list-packages"
-;;;;;;  "el-get/el-get-list-packages.el" (20889 64721 353461 893000))
+;;;;;;  "el-get/el-get-list-packages.el" (21542 58994 162676 98000))
 ;;; Generated autoloads from el-get/el-get-list-packages.el
 
 (autoload 'el-get-list-packages "el-get/el-get-list-packages" "\
@@ -55,8 +61,8 @@ Display a list of packages.
 ;;;### (autoloads (inferior-js-mode switch-to-js js-load-file-and-go
 ;;;;;;  js-load-file js-send-buffer-and-go js-send-buffer js-send-last-sexp
 ;;;;;;  js-send-last-sexp-and-go js-send-region-and-go js-send-region
-;;;;;;  run-js) "js-comint/js-comint" "js-comint/js-comint.el" (20890
-;;;;;;  748 265316 533000))
+;;;;;;  run-js) "js-comint/js-comint" "js-comint/js-comint.el" (21542
+;;;;;;  58899 458671 479000))
 ;;; Generated autoloads from js-comint/js-comint.el
 
 (autoload 'run-js "js-comint/js-comint" "\
@@ -141,7 +147,7 @@ Javascript source.
 ;;;;;;  "el-get/el-get-byte-compile.el" "el-get/el-get-core.el" "el-get/el-get-custom.el"
 ;;;;;;  "el-get/el-get-dependencies.el" "el-get/el-get-install.el"
 ;;;;;;  "el-get/el-get-methods.el" "el-get/el-get-notify.el" "el-get/el-get-recipes.el"
-;;;;;;  "el-get/el-get-status.el") (20890 748 506693 118000))
+;;;;;;  "el-get/el-get-status.el") (21542 58995 836004 180000))
 
 ;;;***
 

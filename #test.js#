@@ -1,0 +1,17 @@
+
+
+
+var ls = require('ls');
+
+function hello() {
+}
+
+
+hello();
+
+
+function() {
+}
+
+function asddas() {
+}

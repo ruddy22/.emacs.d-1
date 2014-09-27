@@ -1,15 +1,23 @@
 
 ;;
 ;; Configured by Strzelewicz Alexandre
-;; https://github.com/Alexandre-Strzelewicz/.emacs.d
+;; https://github.com/Unitech/.emacs.d
 ;;
 
+;;
+;; el-get
+;;
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
-;(setq auto-save-interval 10)            ;击键10次保存
-;(setq auto-save-timeout 1)              ;空闲1秒时就保存
-;(setq auto-save-visited-file-name t)
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
 
-
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+(el-get 'sync)
 
 ;; (split-window-horizontally)
 ;; (save-selected-window
@@ -73,6 +81,10 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 
+(add-to-list 'load-path "~/.emacs.d/autopair")
+(require 'autopair)
+(autopair-global-mode)
+
 ;;
 ;; Smarter emacs
 ;;
@@ -121,30 +133,30 @@ line instead."
 (require 'ido)
 (ido-mode 'both) ;; for buffers and files
 (setq
-  ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
-  ido-ignore-buffers ;; ignore these guys
-  '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
-     "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
-  ido-work-directory-list '("~/" "~/Desktop" "~/Documents" "~src")
-  ido-case-fold  t                 ; be case-insensitive
-  ido-enable-last-directory-history t ; remember last used dirs
-  ido-max-work-directory-list 30   ; should be enough
-  ido-max-work-file-list      50   ; remember many
-  ido-use-filename-at-point nil    ; don't use filename at point (annoying)
-  ido-use-url-at-point nil         ; don't use url at point (annoying)
-  ido-enable-flex-matching nil     ; don't try to be too smart
-  ido-max-prospects 8              ; don't spam my minibuffer
-  ido-confirm-unique-completion t) ; wait for RET, even with unique completion
+ ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
+ ido-ignore-buffers ;; ignore these guys
+ '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
+   "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
+ ido-work-directory-list '("~/" "~/Desktop" "~/Documents" "~src")
+ ido-case-fold  t                 ; be case-insensitive
+ ido-enable-last-directory-history t ; remember last used dirs
+ ido-max-work-directory-list 30   ; should be enough
+ ido-max-work-file-list      50   ; remember many
+ ido-use-filename-at-point nil    ; don't use filename at point (annoying)
+ ido-use-url-at-point nil         ; don't use url at point (annoying)
+ ido-enable-flex-matching nil     ; don't try to be too smart
+ ido-max-prospects 8              ; don't spam my minibuffer
+ ido-confirm-unique-completion t) ; wait for RET, even with unique completion
 
 ;; when using ido, the confirmation is rather annoying...
- (setq confirm-nonexistent-file-or-buffer nil)
+(setq confirm-nonexistent-file-or-buffer nil)
 
 ;; increase minibuffer size when ido completion is active
 (add-hook 'ido-minibuffer-setup-hook
-  (function
-    (lambda ()
-      (make-local-variable 'resize-minibuffer-window-max-height)
-      (setq resize-minibuffer-window-max-height 1))))
+          (function
+           (lambda ()
+             (make-local-variable 'resize-minibuffer-window-max-height)
+             (setq resize-minibuffer-window-max-height 1))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (add-to-list 'load-path "~/.emacs.d/")
@@ -175,34 +187,61 @@ line instead."
 ;;
 (require 'python-mode)
 (setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
-    (setq interpreter-mode-alist (cons '("python" . python-mode)
-                                       interpreter-mode-alist))
-    (autoload 'python-mode "python-mode" "Python editing mode." )
+(setq interpreter-mode-alist (cons '("python" . python-mode)
+                                   interpreter-mode-alist))
+(autoload 'python-mode "python-mode" "Python editing mode." )
 
 ;;
 ;; AUTO tab
 ;;
 (add-hook 'css-mode-hook '(lambda ()
-			    (local-set-key (kbd "RET") 'newline-and-indent)
-			    (rainbow-mode t)
-			    ))
+                            (local-set-key (kbd "RET") 'newline-and-indent)
+                            ))
 (add-hook 'html-mode-hook '(lambda ()
-			     (local-set-key (kbd "RET") 'newline-and-indent)
-			     ))
+                             (local-set-key (kbd "RET") 'newline-and-indent)
+                             ))
 
 
 ;;
 ;; Binding
 ;;
+
+(add-to-list 'load-path "~/.emacs.d/js2-mode")
+
+(require 'js2-mode)
+
 (add-to-list 'auto-mode-alist '("\\.ejs$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-hook 'js-mode-hook 'js2-minor-mode)
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+
 (add-hook 'js2-mode-hook '(lambda ()
-			    (local-set-key (kbd "RET") 'newline-and-indent)
-			    (rainbow-mode t)
-			    ))
+                            (local-set-key (kbd "RET") 'newline-and-indent)
+                            ))
+(eval-after-load "autopair-autoloads"
+  '(progn
+     (require 'autopair)))
+
+(eval-after-load "autopair"
+  '(progn
+     (autopair-global-mode 1)
+
+     (setq my-autopair-off-modes '(
+                                   ;; js2-mode
+                                   ))
+     (dolist (m my-autopair-off-modes)
+       (add-hook (intern (concat (symbol-name m) "-hook"))
+                 #'(lambda () (setq autopair-dont-activate t))))
+     ))
+
+(eval-after-load "js2-mode"
+  '(progn
+     (if (and (boundp 'my-autopair-off-modes)
+              (not (memq 'js2-mode my-autopair-off-modes)))
+         (setq js2-mirror-mode nil))
+     ))
+
 
 (eval-after-load "js2-mode"
   '(progn
@@ -233,18 +272,14 @@ line instead."
 ;;
 ;; Rinari
 ;;
-(add-to-list 'load-path "~/.emacs.d/rinari")
-(require 'rinari)
+;; (add-to-list 'load-path "~/.emacs.d/rinari")
+;; (require 'rinari)
 
 ;;
 ;; ERB & co
 ;;
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/rhtml-minor-mode"))
 (require 'rhtml-mode)
-
-
-
-(require 'hackernews)
 
 ;;
 ;; YAML
@@ -359,23 +394,26 @@ line instead."
 ;;
 (dolist (command '(yank yank-pop))
   (eval `(defadvice ,command (after indent-region activate)
-	   (and (not current-prefix-arg)
-		(member major-mode '(emacs-lisp-mode lisp-mode
-						     clojure-mode    scheme-mode
-						     haskell-mode    ruby-mode
-						     rspec-mode      python-mode
-						     c-mode          c++-mode
-						     js2-mode css-mode
-						     html-mode
-						     objc-mode       latex-mode
-						     plain-tex-mode))
-		(let ((mark-even-if-inactive transient-mark-mode))
-		  (indent-region (region-beginning) (region-end) nil))))))
+           (and (not current-prefix-arg)
+                (member major-mode '(emacs-lisp-mode lisp-mode
+                                                     clojure-mode    scheme-mode
+                                                     haskell-mode    ruby-mode
+                                                     rspec-mode      python-mode
+                                                     c-mode          c++-mode
+                                                     js2-mode css-mode
+                                                     html-mode
+                                                     objc-mode       latex-mode
+                                                     plain-tex-mode))
+                (let ((mark-even-if-inactive transient-mark-mode))
+                  (indent-region (region-beginning) (region-end) nil))))))
 
 
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
 
-
-
+;;
+;; Autocomplete mode
+;;
 ;; (add-to-list 'load-path "~/.emacs.d/popup-0.5")
 ;; (add-to-list 'load-path "~/.emacs.d/ac")
 ;; (require 'auto-complete-config)
@@ -384,36 +422,24 @@ line instead."
 ;; (global-auto-complete-mode t)
 ;; (setq ac-auto-start 2)
 ;; (setq ac-ignore-case nil)
-
-;;
-;; Autocomplete mode
-;; ;;
 ;; (add-to-list 'load-path "~/.emacs.d/auto-complete-1.4")
 ;; (require 'auto-complete-config)
 ;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-
 ;; (setq-default ac-sources (add-to-list 'ac-sources 'ac-source-dictionary))
 ;; (global-auto-complete-mode t)
-;; ; Start auto-completion after 2 characters of a word
+;;                                         ; Start auto-completion after 2 characters of a word
 ;; (setq ac-auto-start 2)
-;; ; case sensitivity is important when finding matches
+;;                                         ; case sensitivity is important when finding matches
 ;; (setq ac-ignore-case nil)
+
 
 ;;
 ;; Yasnippet
 ;;
-(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-0.8.0")
-(require 'yasnippet)
 
-(when (require 'yasnippet nil 'noerror) ;; not: yasnippet-bundle
-  (setq yas/root-directory
-    '("~/.emacs.d/yas/")) ;; my own snippets
-  (mapc 'yas/load-directory yas/root-directory)
-  (setq yas/wrap-around-region t)
-  (setq yas/prompt-functions
-    '(yas/x-prompt yas/ido-prompt))
-  (yas/global-mode 1) ;;  make it global
-  (add-to-list 'auto-mode-alist '("yas/.*" . snippet-mode)))
+(add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
+(require 'yasnippet)
+(yas-global-mode 1)
 
 ;;
 ;; Emacs core fix
@@ -453,21 +479,6 @@ line instead."
 (global-set-key (kbd "C-c a") 'my-align-single-equals)
 
 ;;
-;; el-get
-;;
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
-
-;;
 ;; js-commint
 ;;
 
@@ -484,7 +495,7 @@ line instead."
                             (local-set-key "\C-c\C-b"
                                            'js-send-buffer-and-go)
                             (local-set-key "\C-cl"
-                                'js-load-file-and-go)
+                                           'js-load-file-and-go)
                             ))
 
 (setq inferior-js-mode-hook
@@ -502,13 +513,13 @@ line instead."
 ;;
 ;; Agressive JS3 Mode
 ;;
-(require 'js3-mode)
-(custom-set-variables
- '(js3-auto-indent-p t)         ; it's nice for commas to right themselves.
- '(js3-enter-indents-newline t) ; don't need to push tab before typing
- '(js3-indent-on-enter-key t)
- '(js3-indent-dots t)
-)
+;; (require 'js3-mode)
+;; (custom-set-variables
+;;  '(js3-auto-indent-p t)         ; it's nice for commas to right themselves.
+;;  '(js3-enter-indents-newline t) ; don't need to push tab before typing
+;;  '(js3-indent-on-enter-key t)
+;;  '(js3-indent-dots t)
+;;  )
 
 (require 'flymake-cursor)
 
@@ -526,5 +537,13 @@ line instead."
 
 (setq-default tab-width 2)
 
+;;
+;; Automatic indentation (tab or space) depending on user source code
+;;
 (require 'dtrt-indent)
 (dtrt-indent-mode 1)
+
+;;
+;; Automatic byt compile
+;;
+;;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
