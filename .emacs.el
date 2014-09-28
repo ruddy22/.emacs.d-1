@@ -51,6 +51,9 @@
 (setq-default indent-tabs-mode nil)
 (global-set-key "\M- " 'hippie-expand)
 
+;;(set-language-environment "UTF-8")
+
+
 ;;
 ;; COLORS
 ;;
@@ -59,7 +62,7 @@
 (set-face-background 'show-paren-match-face "Blue")
 (set-face-background 'show-paren-mismatch-face "Magenta")
 (set-face-foreground 'show-paren-mismatch-face "Red")
-(set-face-foreground 'highlight "yellow")
+
 
 ;;
 ;; MISC
@@ -74,6 +77,13 @@
 (setq display-time-string-forms '((format "[%s:%s]-[%s/%s/%s] " 24-hours minutes day month year)))
 (setq scroll-preserve-screen-position t)
 (add-hook 'save-buffer-hook 'delete-trailing-whitespace)
+
+
+;;
+;; Better color for mini-buffer
+;;
+(set-face-foreground 'minibuffer-prompt "#33FFFF")
+
 
 ;;
 ;; Nicer file
@@ -219,14 +229,15 @@ line instead."
 (add-hook 'js2-mode-hook '(lambda ()
                             (local-set-key (kbd "RET") 'newline-and-indent)
                             ))
+;;
+;; Autopair mode for javascript (js2-mode)
+;;
 ;; (eval-after-load "autopair-autoloads"
 ;;   '(progn
 ;;      (require 'autopair)))
-
 ;; (eval-after-load "autopair"
 ;;   '(progn
 ;;      (autopair-global-mode 1)
-
 ;;      (setq my-autopair-off-modes '(
 ;;                                    ;; js2-mode
 ;;                                    ))
@@ -234,7 +245,6 @@ line instead."
 ;;        (add-hook (intern (concat (symbol-name m) "-hook"))
 ;;                  #'(lambda () (setq autopair-dont-activate t))))
 ;;      ))
-
 ;; (eval-after-load "js2-mode"
 ;;   '(progn
 ;;      (if (and (boundp 'my-autopair-off-modes)
@@ -339,10 +349,12 @@ line instead."
 ;;
 ;; Highlight the current line
 ;;
-(require 'highlight-current-line)
-(highlight-current-line-on t)
+;;(global-hl-line-mode)
+;;(set-face-background hl-line-face "#0000ee")
+;; (require 'highlight-current-line)
+;; (highlight-current-line-on t)
 ;; To customize the background color
-(set-face-background 'highlight-current-line-face "#010101")
+;;(set-face-background 'highlight-current-line-face "#010101")
 
 
 ;;
