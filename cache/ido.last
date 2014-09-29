@@ -2,13 +2,13 @@
 
 ;; ----- ido-last-directory-list -----
 (
- ("/home/shant/" . ".i3/")
+ ("/home/shant/Code/" . "wrk/")
+ ("/home/shant/" . "Code/")
 )
 
 ;; ----- ido-work-directory-list -----
 (
- "/home/shant/"
- "/home/shant/.i3/"
+ "/home/shant/Code/wrk/"
  "~/"
  "~/Desktop"
  "~/Documents"
@@ -17,17 +17,16 @@
 
 ;; ----- ido-work-file-list -----
 (
- ".emacs.el"
- "config"
+ "LICENSE"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
- ("/home/shant/" (21543 26168 800370 576000) ".xsession-errors.old" ".nvm/" ".%s.log" ".compiz/" "../" ".dbus/" ".npmrc" ".emacs.el" ".local/" ".emacs.d/" ".gitconfig" ".profile" "examples.desktop" ".npm/" "Documents/" ".ssh/" ".mozilla/" "Templates/" ".bash_logout" ".pm2/" ".node-gyp/" ".gnome/" "Music/" "Public/" ".cache/" ".Xresources" "./" ".i3/" ".ICEauthority" "Videos/" "Downloads/" ".mongorc.js" "VirtualBox VMs/" ".xsession-errors" ".bashrc" "keymetrics.tar.xz" ".Xauthority" "Desktop/" ".pki/" ".config/" ".bash_history" ".gconf/" "Pictures/" ".dbshell" ".dmrc" "keymetrics/" "Code/")
+ ("/home/shant/Code/wrk/" (21542 58574 586655 632000) "src/" "scripts/" "deps/" "../" ".git/" "README" "NOTICE" "Makefile" ".gitignore" "./" "LICENSE" "obj/" "wrk")
 
- ("/home/shant/.i3/" (21543 5408 803524 618000) "test.py" "../" "transset-df-6/" "notes" ".Xresources" "workspace/" "./" "bar.py" "transset-df-6.tar.gz" "session" "config")
+ ("/home/shant/Code/" (21542 58253 222639 956000) "../" "./" "wrk/")
 
- ("/home/shant/.emacs.d/" (21543 1858 73937 628000) "popup-0.5/" "ac-comphist.dat" "haml-mode/" "tabbar.elc" "highlight-current-line.elc" "#README.markdown#" "cache/" "coffee-mode/" "dtrt-indent.elc" "lintnode/" "tabbar.el" "flymake-cursor.el" "php-mode.el" "htmlize.el" "../" ".git/" "fuzzy.elc" "js2-mode/" ".emacs.el" "popup.el" "sws-mode.el" "autopair/" "sr-speedbar.el" "hackernews.el" "markdown-mode/" "web-mode.elc" ".emacs.elc" "typing-speed.el" "ido.el" "mwe-color-box.el" "README.markdown" "espresso.el" ".session" "nodejs-repl.elc" "coffee-mode.elc" "linum.elc" "highlight-current-line.el" "js3-mode.elc" "htmlize.elc" "js-doc.el" "yaml-mode/" ".emacs.desktop" "plugins/" "coffee-mode.el" "fuzzy.el" "snippets/" "jade-mode.elc" "revive.elc" "auto-complete-yasnippet.el" ".gitignore" "nodrepl/" "web-mode.el" "nodejs-repl.el" "sass-mode/" "rhtml-minor-mode/" "./" "js-doc.elc" "sws-mode.elc" "mwe-color-box.elc" "jade-mode/" "rinari/" "#test.js#" "shell-toggle.el" "ac-dict/" "nginx-mode.el" "el-get/" "flymake-cursor.elc" "espresso.elc" "eshell/" "php-mode.elc" "js3-mode.el" "test.js" "linum.el" "nginx-mode.elc" "popup.elc" "jade-mode.el" "ido.elc" "typing-speed.elc" "auto-save-list/" "python-mode.el" "python-mode.elc" "shell-toggle.elc" "auto-complete-1.4/" "yas/" "dtrt-indent.el" "hackernews.elc" "revive.el" "ac/")
+ ("/home/shant/" (21545 18570 959048 843000) ".xsession-errors.old" ".nvm/" ".%s.log" ".compiz/" "../" ".dbus/" ".npmrc" ".emacs.el" ".Skype/" ".local/" ".emacs.d/" ".gitconfig" ".profile" "examples.desktop" ".gnupg/" ".npm/" "Documents/" ".ssh/" ".mozilla/" "Templates/" ".bash_logout" ".pm2/" ".node-gyp/" "imac-hd-wallpaper.jpg" ".gnome/" "Music/" "Public/" ".cache/" ".Xresources" "./" "News/" ".i3/" ".ICEauthority" "Videos/" "Downloads/" ".mongorc.js" "VirtualBox VMs/" ".xsession-errors" ".bashrc" "keymetrics.tar.xz" ".newsrc-dribble" ".Xauthority" "Desktop/" ".pip/" ".pki/" ".config/" ".bash_history" ".gconf/" ".python_history" "Pictures/" ".dbshell" ".dmrc" "keymetrics/" ".fehbg" "Code/")
 )
 
 ;; ----- ido-unc-hosts-cache -----

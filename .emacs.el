@@ -4,6 +4,9 @@
 ;; https://github.com/Unitech/.emacs.d
 ;;
 
+(add-to-list 'custom-theme-load-path
+ (expand-file-name "~/.emacs.d/themes/"))
+
 ;;
 ;; el-get
 ;;
@@ -457,6 +460,11 @@ line instead."
 ;; Emacs core fix
 ;;
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("5008a5c8985fda9803ff9d02bc2a56b45407ccc251ff85a817e9dfe7f345ffe5" default)))
  '(max-lisp-eval-depth 5000)
  '(max-specpdl-size 50000))
 
@@ -559,3 +567,17 @@ line instead."
 ;; Automatic byt compile
 ;;
 ;;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(defun terminal-init-screen ()
+  "Terminal initialization function for screen."
+   ;; Use the xterm color initialization code.
+   (xterm-register-default-colors)
+   (tty-set-up-initial-frame-faces))
+
+(setq frame-background-mode 'dark)
