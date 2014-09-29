@@ -299,6 +299,7 @@ line instead."
 ;;
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/yaml-mode"))
 (require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 ;;
 ;; HAML
