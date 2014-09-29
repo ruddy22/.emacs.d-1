@@ -557,7 +557,6 @@ line instead."
   (flet ((process-list ())) ad-do-it))
 
 (setq-default tab-width 2)
-
 ;;
 ;; Automatic indentation (tab or space) depending on user source code
 ;;
