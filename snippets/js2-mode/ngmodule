@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
-# name: ngmod
+# name: ngmodule
 # contributor: alex strzelewicz
-# key: ngmod
+# key: ngmodule
 # --
 /* global angular */
 

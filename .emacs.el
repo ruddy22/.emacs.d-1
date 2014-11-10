@@ -228,6 +228,7 @@ line instead."
 (add-hook 'js-mode-hook 'js2-minor-mode)
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json5$" . js2-mode))
 
 (add-hook 'js2-mode-hook '(lambda ()
                             (local-set-key (kbd "RET") 'newline-and-indent)
@@ -475,7 +476,9 @@ line instead."
 (add-to-list 'load-path "~/.emacs.d/jade-mode")
 (require 'sws-mode)
 (require 'jade-mode)
-(add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
+(require 'stylus-mode)
+
+(add-to-list 'auto-mode-alist '("\\.styl$" . stylus-mode))
 (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
 
 ;;
@@ -560,8 +563,8 @@ line instead."
 ;;
 ;; Automatic indentation (tab or space) depending on user source code
 ;;
-(require 'dtrt-indent)
-(dtrt-indent-mode 1)
+;; (require 'dtrt-indent)
+;; (dtrt-indent-mode 1)
 
 ;;
 ;; Automatic byt compile

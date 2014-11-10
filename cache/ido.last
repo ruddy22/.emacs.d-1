@@ -2,14 +2,15 @@
 
 ;; ----- ido-last-directory-list -----
 (
- ("/home/shant/keymetrics/" . "backend/")
- ("/home/shant/" . ".i3/")
+ ("/home/shant/keymetrics/axm/test/" . "fixtures/")
+ ("/home/shant/keymetrics/axm/" . "lib/")
 )
 
 ;; ----- ido-work-directory-list -----
 (
- "/home/shant/.i3/"
- "/home/shant/keymetrics/backend/"
+ "/home/shant/keymetrics/axm/lib/"
+ "/home/shant/keymetrics/axm/test/fixtures/"
+ "/home/shant/keymetrics/axm/test/"
  "~/"
  "~/Desktop"
  "~/Documents"
@@ -18,19 +19,26 @@
 
 ;; ----- ido-work-file-list -----
 (
- "config"
- "app.js"
+ "options.js"
+ "notify_catch_all.mock.js"
+ "notify.js"
+ "event.mock.js"
+ "transaction.mocha.js"
+ "event.mocha.js"
+ "notify.mocha.js"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
- ("/home/shant/.i3/" (21545 20166 795020 265000) "test.py" "../" ".git/" "transset-df-6/" "notes" ".#bar.py" "tmuxinator/" ".Xresources" "workspace/" "./" "bar.py" ".bashrc" "tmuxifier/" "wallpaper/" "transset-df-6.tar.gz" "session" "config")
+ ("/home/shant/keymetrics/axm/lib/" (21596 51255 286205 614000) "../" "transaction.js" "options.js" "utils/" "wrapper/" "monitor.js" "./" "index.js" "actions.js" "notify.js" "events.js" "common.js")
 
- ("/home/shant/" (21545 22322 134892 22000) ".xsession-errors.old" ".nvm/" "#.Xresources#" ".%s.log" ".compiz/" "../" ".dbus/" "#examples.desktop#" ".npmrc" ".emacs.el" ".Skype/" ".local/" ".emacs.d/" ".gitconfig" ".profile" "examples.desktop" ".gnupg/" ".npm/" "Documents/" ".ssh/" ".mozilla/" "Templates/" ".bash_logout" ".pm2/" ".tmuxinator/" ".node-gyp/" "imac-hd-wallpaper.jpg" ".gnome/" "Music/" ".gem/" "Public/" ".cache/" ".Xresources" "./" "News/" ".i3/" ".ICEauthority" "Videos/" "Downloads/" ".mongorc.js" "VirtualBox VMs/" ".xsession-errors" ".bashrc" "keymetrics.tar.xz" ".newsrc-dribble" ".Xauthority" "Desktop/" ".pip/" ".pki/" ".config/" ".tmuxifier/" ".bash_history" ".gconf/" "tmux-server-11269.log" ".python_history" "Pictures/" ".dbshell" ".dmrc" "keymetrics/" "tmux-client-11267.log" ".fehbg" "Code/")
+ ("/home/shant/keymetrics/axm/test/" (21596 51010 486209 998000) "../" "fixtures/" "monitor.mocha.js" "transaction/" "mocha.opts" ".#notify.mocha.js" "./" "axm.mocha.js" "proc.mock.js" "notify.mocha.js" "event.mocha.js" "express/" "#notify.mocha.js#" "event.mock.js" "transaction.mocha.js")
 
- ("/home/shant/keymetrics/backend/" (21543 59192 742766 972000) "app_notification.js" "app_nightly_report/" "node_modules/" "keymetrics.png" "app_nightly_report.js" "../" ".git/" "README.md" "app_interaction/" "package.json" "controllers/" "environments/" "ecosystem.json" "app_worker.js" "app_reverse_interaction/" "app_interaction.js" "app_worker/" "test.pdf" "nginx.conf" "routes.js" "test/" ".gitignore" "./" "mail_templates/" "data_methods/" "config.js" "app_reverse_interaction.js" "models/" "app.js" "workers/" "app_notification/" "launch.sh" "test-debug.js" "pm2-deploy.log" "reset.js" "ressources/" "launch2.sh" "bo.axmonitoring.com/" "Gruntfile.js" "lib/")
+ ("/home/shant/keymetrics/axm/" (21596 50893 950212 85000) "node_modules/" "../" ".git/" "README.md" "package.json" ".travis.yml" "test/" ".gitignore" "./" "index.js" "npm-debug.log" "lib/")
 
- ("/home/shant/keymetrics/" (21538 1772 0 0) "test.py" "km-agent/" "node_modules/" "../" "toto" "tst.js" "backend/" "front/" "freelance-work/" "pm2-axon-rpc/" "term.js/" "pm2-lab/" "tmp/" "pm2-axon/" "website/" "pm2-rpc-fallback/" "pm2-interface/" "./" "probeRD/" "pm2-test/" "pm2-logs/" "index.js" "server.js" "axm/" "pm2/" "RD/" "ikst/" "TODO-pm2.md" "ActionMethods.js" "twitter-bot/" "pm2-deploy/" "socketio-pinger/" "pm2-ping/" "ikm/" "async-profile/")
+ ("/home/shant/keymetrics/axm/test/fixtures/" (21578 22911 983053 619000) "monitor.mock.js" "../" "notify_catch_all.mock.js" "notify.mock.js" "./")
+
+ ("/home/shant/keymetrics/" (21592 59549 931906 777000) "vizionar/" "vizionar-fixtures/" "test.py" "km-agent/" "node_modules/" "nginx/" "../" "node-books/" "domain.js" "toto" "tst.js" "backend/" "#t#" "db-profiler/" "front/" "freelance-work/" "ecosystem.json" "pm2-axon-rpc/" "term.js/" "date_test.js" "pm2-lab/" "tmp/" "app-playground/" "pm2-axon/" ".#t" "website/" "pm2-rpc-fallback/" "Linux" "lrhr/" "getkeymetrics.com/" "pm2-interface/" "./" "probeRD/" "web-bckp/" "pm2-test/" "pm2-logs/" "index.js" "server.js" "axm/" "pm2/" "angular-bridge/" "RD/" "ikst/" "TODO-pm2.md" "pm2DAMN/" "ActionMethods.js" "twitter-bot/" "devops/" "pm2-deploy/" "socketio-pinger/" "pm2-ping/" "npm-debug.log" "ikm/" "async-profile/")
 )
 
 ;; ----- ido-unc-hosts-cache -----
