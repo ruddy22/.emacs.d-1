@@ -4,7 +4,7 @@ Emacs plugin pack
 ## Install
 
     git clone https://github.com/Alexandre-Strzelewicz/.emacs.d.git ~/.emacs.d
-    ln -s ~/emacs.d/.emacs.el ~/.emacs.el
+    ln -s ~/emacs.d/.emacs.el ~
 
 ## Plugins
 
@@ -18,7 +18,7 @@ Emacs plugin pack
 * CoffeeScript (https://github.com/defunkt/coffee-mode)
 * RHtml mode (git://github.com/eschulte/rhtml.git)
 * Yaml mode (svn - http://svn.clouder.jp/repos/public/yaml-mode/trunk/)
-* Haml mode  
+* Haml mode
 * Sass mode
 * Markdown mode
 
@@ -26,8 +26,7 @@ Emacs plugin pack
 
 * Color parenthesis
 * Backup files disabled
-* Color modified 
-* Some shortcuts 
+* Color modified
+* Some shortcuts
 * Fly between window (ALT + UP/DOWN/R/L for switch between window)
 * Resize windows size (F5 + F6 + F7 + F8)
-
