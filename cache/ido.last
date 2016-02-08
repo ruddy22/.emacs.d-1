@@ -2,15 +2,14 @@
 
 ;; ----- ido-last-directory-list -----
 (
- ("/home/shant/keymetrics/axm/test/" . "fixtures/")
- ("/home/shant/keymetrics/axm/" . "lib/")
+ ("/home/arkotek/keymetrics/" . "km-api/")
+ ("/home/arkotek/" . "keymetrics/")
 )
 
 ;; ----- ido-work-directory-list -----
 (
- "/home/shant/keymetrics/axm/lib/"
- "/home/shant/keymetrics/axm/test/fixtures/"
- "/home/shant/keymetrics/axm/test/"
+ "/home/arkotek/keymetrics/km-api/"
+ "/home/arkotek/keymetrics/km-front/"
  "~/"
  "~/Desktop"
  "~/Documents"
@@ -19,26 +18,21 @@
 
 ;; ----- ido-work-file-list -----
 (
- "options.js"
- "notify_catch_all.mock.js"
- "notify.js"
- "event.mock.js"
- "transaction.mocha.js"
- "event.mocha.js"
- "notify.mocha.js"
+ "app.js"
+ "Gruntfile.js"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
- ("/home/shant/keymetrics/axm/lib/" (21596 51255 286205 614000) "../" "transaction.js" "options.js" "utils/" "wrapper/" "monitor.js" "./" "index.js" "actions.js" "notify.js" "events.js" "common.js")
+ ("/home/arkotek/keymetrics/km-api/" (22200 46840 956308 860000) "WARNING.md" "Gruntfile.js" "test/" ".git/" "app_engagement/" "mail_templates/" "doc/" "app_reverse_interaction/" "routes.js" "README.md" "npm-shrinkwrap.json" "app.js" "start.sh" ".gitignore" "config.js" "deploy-all.sh" "environments/" "models/" "app_nightly_report/" "package.json" "deploy.sh" "./" "lib/" "data_methods/" "app_worker/" "keymetrics.png" "ecosystem.json" "node_modules/" "deprecated/" "km-backoffice/" "app_notification/" "controllers/" "app_interaction/" "app_realtime/" "../" "favicon.ico")
 
- ("/home/shant/keymetrics/axm/test/" (21596 51010 486209 998000) "../" "fixtures/" "monitor.mocha.js" "transaction/" "mocha.opts" ".#notify.mocha.js" "./" "axm.mocha.js" "proc.mock.js" "notify.mocha.js" "event.mocha.js" "express/" "#notify.mocha.js#" "event.mock.js" "transaction.mocha.js")
+ ("/home/arkotek/keymetrics/km-front/" (22200 47394 981830 351000) "Gruntfile.js" "locals-prod.json" "test/" ".git/" "doc/" "locals.json" "README.md" "npm-shrinkwrap.json" "start.sh" ".gitignore" "gulpfile.js" "CHANGELOG.md" "scss/" "package.json" "./" "ecosystem.json" "node_modules/" "app/" "../" "ejs/" ".gitattributes")
 
- ("/home/shant/keymetrics/axm/" (21596 50893 950212 85000) "node_modules/" "../" ".git/" "README.md" "package.json" ".travis.yml" "test/" ".gitignore" "./" "index.js" "npm-debug.log" "lib/")
+ ("/home/arkotek/keymetrics/" (22200 46768 603604 496000) "pm2/" "km-api/" "./" "../" "km-front/")
 
- ("/home/shant/keymetrics/axm/test/fixtures/" (21578 22911 983053 619000) "monitor.mock.js" "../" "notify_catch_all.mock.js" "notify.mock.js" "./")
+ ("/home/arkotek/" (22200 47460 681547 504000) ".cache/" ".gnupg/" ".local/" ".npm/" ".node-gyp/" ".bashrc" "Desktop/" ".xsession-errors" ".ssh/" ".dmrc" "Downloads/" ".bash_logout" "Documents/" ".xsession-errors.old" ".profile" ".ICEauthority" ".sudo_as_admin_successful" ".Xauthority" ".gnome/" "Pictures/" "Templates/" ".tor-browser-en/" ".emacs.d/" ".electrum/" "Music/" "./" ".emacs.el" ".bash_history" ".nvm/" "Videos/" ".mozilla/" ".dbus/" "keymetrics/" "../" ".config/" "examples.desktop" ".pki/" "Public/" ".pm2/" ".gconf/")
 
- ("/home/shant/keymetrics/" (21592 59549 931906 777000) "vizionar/" "vizionar-fixtures/" "test.py" "km-agent/" "node_modules/" "nginx/" "../" "node-books/" "domain.js" "toto" "tst.js" "backend/" "#t#" "db-profiler/" "front/" "freelance-work/" "ecosystem.json" "pm2-axon-rpc/" "term.js/" "date_test.js" "pm2-lab/" "tmp/" "app-playground/" "pm2-axon/" ".#t" "website/" "pm2-rpc-fallback/" "Linux" "lrhr/" "getkeymetrics.com/" "pm2-interface/" "./" "probeRD/" "web-bckp/" "pm2-test/" "pm2-logs/" "index.js" "server.js" "axm/" "pm2/" "angular-bridge/" "RD/" "ikst/" "TODO-pm2.md" "pm2DAMN/" "ActionMethods.js" "twitter-bot/" "devops/" "pm2-deploy/" "socketio-pinger/" "pm2-ping/" "npm-debug.log" "ikm/" "async-profile/")
+ ("/home/arkotek/.emacs.d/" (22200 47978 401067 796000) "linum.el" "espresso.el" "themes/" "#README.markdown#" "snippets/" "yaml-mode/" "shell-toggle.elc" "cache/" "flymake-cursor/" "coffee-mode/" "typing-speed.elc" "mwe-color-box.elc" "rinari/" ".git/" "nodrepl/" "rhtml-minor-mode/" "htmlize.el" "ido.elc" "revive.el" "test.js" ".emacs.desktop" "web-mode.elc" "popup.el" "highlight-current-line.elc" "nodejs-repl.el" "coffee-mode.el" "haml-mode/" "fuzzy.el" "auto-save-list/" ".gitignore" ".session" "stylus-mode/" "highlight-current-line.el" "js3-mode.el" "plugins/" "flymake-cursor.elc" "revive.elc" "js3-mode.elc" "htmlize.elc" "autopair/" "markdown-mode/" "espresso.elc" "sass-mode/" "ido.el" "#test.js#" "ac-comphist.dat" "ac-dict/" "typing-speed.el" "js-doc.elc" "eshell/" ".emacs.elc" "dtrt-indent.el" "php-mode/" "sr-speedbar/" "tabbar.elc" "lintnode/" "nodejs-repl.elc" "hackernews.elc" "./" "nginx-mode.el" ".emacs.el" "auto-complete-yasnippet.el" "coffee-mode.elc" "python-mode.elc" "js2-mode/" "ac/" "dtrt-indent.elc" "auto-complete-1.4/" "el-get/" "linum.elc" "../" "hackernews.el" "jade-mode/" "popup.elc" "yas/" "nginx-mode.elc" "web-mode/" "php-mode.elc" "sws-mode/" "tabbar.el" "shell-toggle.el" "python-mode/" "js-doc.el" "mwe-color-box.el" "fuzzy.elc" "popup-0.5/" "sws-mode.elc" "README.markdown")
 )
 
 ;; ----- ido-unc-hosts-cache -----

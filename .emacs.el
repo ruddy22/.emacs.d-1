@@ -172,11 +172,11 @@ line instead."
              (setq resize-minibuffer-window-max-height 1))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-to-list 'load-path "~/.emacs.d/")
+;;(add-to-list 'load-path "~/.emacs.d/")
 ;;
 ;; nginxmode
 ;;
-(require 'nginx-mode)
+;;(require 'nginx-mode)
 
 ;;
 ;; Org mode
@@ -198,6 +198,7 @@ line instead."
 ;;
 ;; Python mod
 ;;
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/python-mode"))
 (require 'python-mode)
 (setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
 (setq interpreter-mode-alist (cons '("python" . python-mode)
@@ -311,6 +312,7 @@ line instead."
 ;;
 ;; HBS
 ;;
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/web-mode"))
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.hbs$" . web-mode))
 
@@ -365,6 +367,7 @@ line instead."
 ;;
 ;; Special Speedbar
 ;;
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/sr-speedbar"))
 (require 'sr-speedbar)
 
 (setq speedbar-hide-button-brackets-flag t
@@ -474,6 +477,8 @@ line instead."
 ;; Jade mode
 ;;
 (add-to-list 'load-path "~/.emacs.d/jade-mode")
+(add-to-list 'load-path "~/.emacs.d/sws-mode")
+(add-to-list 'load-path "~/.emacs.d/stylus-mode")
 (require 'sws-mode)
 (require 'jade-mode)
 (require 'stylus-mode)
@@ -545,7 +550,10 @@ line instead."
 ;;  '(js3-indent-dots t)
 ;;  )
 
+(add-to-list 'load-path "~/.emacs.d/flymake-cursor")
 (require 'flymake-cursor)
+
+(add-to-list 'load-path "~/.emacs.d/php-mode")
 
 (require 'php-mode)
 
