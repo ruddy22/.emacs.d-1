@@ -339,6 +339,14 @@ line instead."
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 
 ;;
+;; Typescript
+;;
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/typescript"))
+(require 'typescript)
+(add-to-list 'auto-mode-alist '("\\.ts$" . typescript-mode))
+(setq typescript-indent-level 2)
+
+;;
 ;; Resize window
 ;;
 (global-set-key (kbd "<f5>") 'shrink-window-horizontally)
