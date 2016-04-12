@@ -485,7 +485,7 @@ line instead."
 ;;
 ;; Jade mode
 ;;
-(add-to-list 'load-path "~/.emacs.d/jade-mode")
+(add-to-list 'load-path "~/.emacs.d/jade-mode-2")
 (add-to-list 'load-path "~/.emacs.d/sws-mode")
 (add-to-list 'load-path "~/.emacs.d/stylus-mode")
 (require 'sws-mode)
