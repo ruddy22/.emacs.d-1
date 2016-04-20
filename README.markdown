@@ -30,3 +30,5 @@ Emacs plugin pack
 * Some shortcuts
 * Fly between window (ALT + UP/DOWN/R/L for switch between window)
 * Resize windows size (F5 + F6 + F7 + F8)
+
+# updated in 2016
