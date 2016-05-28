@@ -222,18 +222,59 @@ line instead."
 
 (add-to-list 'load-path "~/.emacs.d/js2-mode")
 
+
+
+
 (require 'js2-mode)
+
+;;
+;; JSON mode base on js2-mode
+;;
+(make-variable-buffer-local 'js2-parse-as-json)
+(defadvice js2-reparse (before json)
+  (setq js2-buffer-file-name buffer-file-name))
+(ad-activate 'js2-reparse)
+
+(defadvice js2-parse-statement (around json)
+  (if (and (= tt js2-LC)
+           js2-buffer-file-name
+           (or js2-parse-as-json
+               (string-equal (substring js2-buffer-file-name -5) ".json"))
+           (eq (+ (save-excursion
+                    (goto-char (point-min))
+                    (back-to-indentation)
+                    (while (eolp)
+                      (next-line)
+                      (back-to-indentation))
+                    (point)) 1) js2-ts-cursor))
+      (setq ad-return-value (js2-parse-assign-expr))
+    ad-do-it))
+(ad-activate 'js2-parse-statement)
+
+(define-derived-mode json-mode js2-mode "JSON"
+  "Major mode for editing JSON data."
+  :group 'json
+  (setq js2-parse-as-json t)
+  (js2-reparse t))
+
+(add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
+(add-to-list 'auto-mode-alist '("\\.json5$" . json-mode))
 
 (add-to-list 'auto-mode-alist '("\\.ejs$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-hook 'js-mode-hook 'js2-minor-mode)
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.json5$" . js2-mode))
 
 (add-hook 'js2-mode-hook '(lambda ()
                             (local-set-key (kbd "RET") 'newline-and-indent)
                             ))
+
+
+
+(custom-set-variables '(js2-strict-missing-semi-warning nil))
+(custom-set-variables '(js2-missing-semi-one-line-override t))
+(custom-set-variables '(js2-strict-inconsistent-return-warning nil))
+
 ;;
 ;; Autopair mode for javascript (js2-mode)
 ;;
