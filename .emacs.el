@@ -61,7 +61,7 @@
 ;; COLORS
 ;;
 (set-cursor-color "Red")
-(set-face-background 'region "#26d840")
+(set-face-background 'region "#666")
 (set-face-background 'show-paren-match-face "Blue")
 (set-face-background 'show-paren-mismatch-face "Magenta")
 (set-face-foreground 'show-paren-mismatch-face "Red")
