@@ -196,6 +196,12 @@ line instead."
   "Pops up a shell-buffer and insert a \"cd <file-dir>\" command." t)
 
 ;;
+;; TOML
+;;
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/toml-mode"))
+(require 'toml-mode)
+
+;;
 ;; Python mod
 ;;
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/python-mode"))
