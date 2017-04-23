@@ -1,6 +1,6 @@
 ;;; tests/parser.el --- Some tests for js2-mode.
 
-;; Copyright (C) 2009, 2011-2013  Free Software Foundation, Inc.
+;; Copyright (C) 2009, 2011-2016  Free Software Foundation, Inc.
 
 ;; This file is part of GNU Emacs.
 
@@ -46,7 +46,7 @@
   js2-mode-ast)
 
 (cl-defun js2-test-parse-string (code-string &key syntax-error errors-count
-                                             reference)
+                                             reference warnings-count)
   (ert-with-test-buffer (:name 'origin)
     (let ((ast (js2-test-string-to-ast code-string)))
       (if syntax-error
@@ -61,10 +61,13 @@
           (skip-chars-backward " \t\n")
           (should (string= (or reference code-string)
                            (buffer-substring-no-properties
-                            (point-min) (point)))))))))
+                            (point-min) (point)))))
+        (when warnings-count
+          (should (= warnings-count
+                     (length (js2-ast-root-warnings ast)))))))))
 
 (cl-defmacro js2-deftest-parse (name code-string &key bind syntax-error errors-count
-                                     reference)
+                                     reference warnings-count)
   "Parse CODE-STRING.  If SYNTAX-ERROR is nil, print syntax tree
 with `js2-print-tree' and assert the result to be equal to
 REFERENCE, if present, or the original string.  If SYNTAX-ERROR
@@ -77,6 +80,7 @@ the test."
        (js2-test-parse-string ,code-string
                               :syntax-error ,syntax-error
                               :errors-count ,errors-count
+                              :warnings-count ,warnings-count
                               :reference ,reference))))
 
 ;;; Basics
@@ -180,22 +184,27 @@ the test."
 ;;; Destructuring binding
 
 (js2-deftest-parse destruct-in-declaration
-  "var {a, b} = {a: 1, b: 2};")
+  "var {a, b} = {a: 1, b: 2};"
+  :warnings-count 0)
 
 (js2-deftest-parse destruct-in-arguments
-  "function f({a: aa, b: bb}) {\n}")
+  "function f({a: aa, b: bb}) {\n}"
+  :warnings-count 0)
 
 (js2-deftest-parse destruct-in-array-comp-loop
   "[a + b for ([a, b] in [[0, 1], [1, 2]])];")
 
 (js2-deftest-parse destruct-in-catch-clause
-  "try {\n} catch ({a, b}) {\n  a + b;\n}")
+  "try {\n} catch ({a, b}) {\n  a + b;\n}"
+  :warnings-count 0)
 
 (js2-deftest-parse destruct-with-initializer-in-object
-  "var {a, b = 2, c} = {};")
+  "var {a, b = 2, c} = {};\nb;"
+  :warnings-count 0)
 
 (js2-deftest-parse destruct-with-initializer-in-array
-  "var [a, b = 2, c] = [];")
+  "var [a, b = 2, c] = [];\nb;"
+  :warnings-count 0)
 
 (js2-deftest-parse destruct-non-name-target-is-error
   "var {1=1} = {};" :syntax-error "1" :errors-count 1)
@@ -251,7 +260,7 @@ the test."
   "var x = {get [foo + bar]() {  return 42;\n}};")
 
 (js2-deftest-parse object-literal-generator
-  "var x = {*foo() {  yield 42;\n}};")
+  "var x = {*foo() {  yield* 42;\n}};")
 
 (js2-deftest-parse object-literal-computed-generator-key
   "var x = {*[foo + bar]() {  yield 42;\n}};")
@@ -381,6 +390,12 @@ the test."
 (js2-deftest-parse array-destructure-expr-default
   "let [[x] = [3]] = y;")
 
+(js2-deftest-parse spread-in-object-literal
+  "f({x, y, ...z});")
+
+(js2-deftest-parse rest-in-object-literal
+  "const {x, y, ...z} = f();")
+
 ;;; Arrow functions
 
 (js2-deftest-parse arrow-function-with-empty-args-and-no-curlies
@@ -441,6 +456,9 @@ the test."
 
 (js2-deftest-parse harmony-generator-yield-star "(function*(a) {  yield* a;\n});")
 
+(js2-deftest-parse harmony-generator-yield-assign-expr
+  "(function*() {  return {a: yield a, b: yield b, c: yield c};\n});")
+
 ;;; Comprehensions
 
 (js2-deftest-parse parse-legacy-array-comp-loop-with-filter
@@ -481,6 +499,9 @@ the test."
 
 (js2-deftest-parse async-method-in-object-literal
   "({async f() {}});")
+
+(js2-deftest-parse async-method-kwname-in-object-literal
+  "({async delete() {}});")
 
 (js2-deftest-parse async-method-in-class-body
   "class C {\n  async foo() {}\n}")
@@ -919,6 +940,22 @@ the test."
 (js2-deftest-parse parse-harmony-class-allow-semicolon-element
   "class Foo {;}" :reference "class Foo {\n}")
 
+(js2-deftest-parse exponentiation
+  "a **= b ** c ** d * e ** f;")
+
+(js2-deftest-parse exponentiation-prohibits-unary-op
+  "var a = -b ** c" :syntax-error "b")
+
+(js2-deftest-parse parse-class-public-field-with-init
+  "class C {\n  x = 42;\n  y = 24;\n  \"z\" = 1\n  456 = 789\n}"
+  :reference "class C {\n  x = 42\n  y = 24\n  \"z\" = 1\n  456 = 789\n}")
+
+(js2-deftest-parse parse-class-public-field-no-init
+  "class C {\n  x\n  y\n  \"z\"\n  456\n}")
+
+(js2-deftest-parse parse-class-public-field-computed
+  "class C {\n  [a + b] = c\n}")
+
 ;;; Scopes
 
 (js2-deftest ast-symbol-table-includes-fn-node "function foo() {}"
@@ -953,22 +990,12 @@ the test."
   (js2-mode--and-parse)
   (js2-test-scope-of-nth-variable-satisifies-predicate "i" 0 #'js2-for-node-p))
 
-(js2-deftest const-scope-sloppy-script "{const a;} a;"
-  (js2-mode--and-parse)
-  (js2-test-scope-of-nth-variable-satisifies-predicate "a" 0 #'js2-script-node-p)
-  (js2-test-scope-of-nth-variable-satisifies-predicate "a" 1 #'js2-script-node-p))
-
-(js2-deftest const-scope-strict-script "'use strict'; { const a; } a;"
+(js2-deftest const-scope-inside-script "{ const a; } a;"
   (js2-mode--and-parse)
   (js2-test-scope-of-nth-variable-satisifies-predicate "a" 0 #'js2-block-node-p)
   (js2-test-scope-of-nth-variable-satisifies-predicate "a" 1 #'null))
 
-(js2-deftest const-scope-sloppy-function "function f() { { const a; } a; }"
-  (js2-mode--and-parse)
-  (js2-test-scope-of-nth-variable-satisifies-predicate "a" 0 #'js2-function-node-p)
-  (js2-test-scope-of-nth-variable-satisifies-predicate "a" 1 #'js2-function-node-p))
-
-(js2-deftest const-scope-strict-function "function f() { 'use strict'; { const a; } a; }"
+(js2-deftest const-scope-inside-function "function f() { { const a; } a; }"
   (js2-mode--and-parse)
   (js2-test-scope-of-nth-variable-satisifies-predicate "a" 0 #'js2-block-node-p)
   (js2-test-scope-of-nth-variable-satisifies-predicate "a" 1 #'null))
@@ -1143,7 +1170,7 @@ the test."
 
 (js2-deftest-classify-variables prop-get-function-assignment
   "(function(w) { w.f = function() { var a=42, m; return a; }; })(window);"
-  '("w@11:P" 11 16 "a@39:I" 55 "m@45:U"))
+  '("w@11:P" 16 "a@39:I" 55 "m@45:U"))
 
 (js2-deftest-classify-variables let-declaration
   "function foo () { let x,y=1; return x; }"
@@ -1170,8 +1197,8 @@ the test."
   '("foo@10:U" "e@47:I" 64))
 
 (js2-deftest-classify-variables prop-get-assignment
-  "function foo () { var x={y:{z:{}}}; x.y.z=42; }"
-  '("foo@10:U" "x@23:I" 37))
+  "function foo () { var y,x={y:{z:{}}}; x.y.z=42; }"
+  '("foo@10:U" "y@23:U" "x@25:I" 39))
 
 (js2-deftest-classify-variables unused-function-argument
   "function foo (a) { return 42; }"
@@ -1198,9 +1225,25 @@ the test."
   '("foo@10:U" "j@22:N" 30 "a@24:U" "i@38:I" 28))
 
 (js2-deftest-classify-variables return-named-function
-  "function foo() { var a=42; return function bar() { return a; } }"
-  '("foo@10:U" "a@22:I" 59 "bar@44:I" 44))
+  "function foo() { var a=42; return function bar() { return a; }; }"
+  '("foo@10:U" "a@22:I" 59 "bar@44:U"))
 
 (js2-deftest-classify-variables named-wrapper-function
   "function foo() { var a; (function bar() { a=42; })(); return a; }"
   '("foo@10:U" "a@22:I" 62 "bar@35:I" 35))
+
+(js2-deftest-classify-variables destructure-array
+  "function foo(x,y) { let [u,v] = [x,y]; }"
+  '("foo@10:U" "x@14:P" 34 "y@16:P" 36 "u@26:U" "v@28:U"))
+
+(js2-deftest-classify-variables destructure-object
+  "function foo(x,y) { var {p: [, w], q: z} = {p: [x, 2, 3], q: y}; }"
+  '("foo@10:U" "x@14:P" 49 "y@16:P" 62 "w@32:U" "z@39:U"))
+
+(js2-deftest-classify-variables destructure-object-shorthand
+  "function foo(x,y) { var {p, q} = {p: x, q: y}; }"
+  '("foo@10:U" "x@14:P" 38 "y@16:P" 44 "p@26:U" "q@29:U"))
+
+(js2-deftest-classify-variables destructure-object-mixed
+  "function foo() { let {a, b, c = 3} = {a: 1, b: 2}; }"
+  '("foo@10:U" "a@23:U" "b@26:U" "c@29:U"))

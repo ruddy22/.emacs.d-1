@@ -4,8 +4,8 @@
 ;; https://github.com/Unitech/.emacs.d
 ;;
 
-(add-to-list 'custom-theme-load-path
- (expand-file-name "~/.emacs.d/themes/"))
+;; (add-to-list 'custom-theme-load-path
+;;  (expand-file-name "~/.emacs.d/themes/"))
 
 ;;
 ;; el-get
@@ -201,6 +201,18 @@ line instead."
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/toml-mode"))
 (require 'toml-mode)
 
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/vue-html-mode"))
+(require 'vue-html-mode)
+
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/mmm-mode"))
+(require 'mmm-mode)
+
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/ssass-mode"))
+(require 'ssass-mode)
+
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/vue-mode"))
+(require 'vue-mode)
+
 ;;
 ;; Python mod
 ;;
@@ -349,6 +361,7 @@ line instead."
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/yaml-mode"))
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 
 ;;
 ;; HAML
@@ -541,6 +554,7 @@ line instead."
 
 (add-to-list 'auto-mode-alist '("\\.styl$" . stylus-mode))
 (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+(add-to-list 'auto-mode-alist '("\\.pug$" . jade-mode))
 
 ;;
 ;; Test function

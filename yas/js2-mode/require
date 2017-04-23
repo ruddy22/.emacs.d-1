@@ -3,4 +3,4 @@
 # contributor: alex strzelewicz
 # key: req
 # --
-var $1 = require('$1');$2
+const $1 = require('$1');$2

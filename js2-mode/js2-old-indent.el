@@ -131,7 +131,7 @@ switch statement body are indented one additional level."
 followed by an opening brace.")
 
 (defconst js2-indent-operator-re
-  (concat "[-+*/%<>&^|?:.]\\([^-+*/]\\|$\\)\\|!?=\\|"
+  (concat "[-+*/%<>&^|?:.]\\([^-+*/.]\\|$\\)\\|!?=\\|"
           (regexp-opt '("in" "instanceof") 'symbols))
   "Regular expression matching operators that affect indentation
 of continued expressions.")
@@ -223,6 +223,10 @@ and comments have been removed."
            (save-excursion
              (and (js2-re-search-backward "[?:{]\\|\\_<case\\_>" nil t)
                   (eq (char-after) ??))))
+       (not (and
+             (eq (char-after) ?/)
+             (save-excursion
+               (eq (nth 3 (syntax-ppss)) ?/))))
        (not (and
              (eq (char-after) ?*)
              ;; Generator method (possibly using computed property).

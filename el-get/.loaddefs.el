@@ -3,8 +3,8 @@
 ;;; Code:
 
 
-;;;### (autoloads nil "el-get/el-get" "el-get/el-get.el" (22375 8383
-;;;;;;  159285 621000))
+;;;### (autoloads nil "el-get/el-get" "el-get/el-get.el" (22596 8971
+;;;;;;  637202 996000))
 ;;; Generated autoloads from el-get/el-get.el
 
 (autoload 'el-get-version "el-get/el-get" "\
@@ -104,13 +104,13 @@ already installed packages is considered.
 ;;;***
 
 ;;;### (autoloads nil "el-get/el-get-bundle" "el-get/el-get-bundle.el"
-;;;;;;  (22375 8383 159285 621000))
+;;;;;;  (22596 8971 633202 983000))
 ;;; Generated autoloads from el-get/el-get-bundle.el
 
 (autoload 'el-get-bundle-el-get "el-get/el-get-bundle" "\
 
 
-\(fn SRC)" nil nil)
+\(fn SRC SYNC)" nil nil)
 
 (autoload 'el-get-bundle "el-get/el-get-bundle" "\
 Install PACKAGE and run initialization FORM.
@@ -130,9 +130,14 @@ same.  If you wish to `require' more than one feature, then use
 `:features' property in FORM.
 
 The initialization FORM may start with a property list that
-describes a local recipe.  The FORM after the property list is
-treated as initialization code, which is actually an `:after'
-property of the local recipe.
+describes a local recipe.  The property list may include the keyword
+`:bundle-sync' with a value of either `t' or `nil' to request that
+`el-get-bundle' invoke `el-get' synchronously (respectively asynchronously).
+The keyword `:bundle-async' is the inverse of `:bundle-sync'.
+\(Note that the request to run el-get synchronously may not be respected in all
+circumstances: see the definition of `el-get-bundle-el-get' for details.)
+The FORM after the property list is treated as initialization code,
+which is actually an `:after' property of the local recipe.
 
 A copy of the initialization code is stored in a directory
 specified by `el-get-bundle-init-directory' and its byte-compiled
@@ -154,7 +159,7 @@ required.
 ;;;***
 
 ;;;### (autoloads nil "el-get/el-get-check" "el-get/el-get-check.el"
-;;;;;;  (22375 8383 159285 621000))
+;;;;;;  (22596 8971 633202 983000))
 ;;; Generated autoloads from el-get/el-get-check.el
 
 (autoload 'el-get-check-recipe "el-get/el-get-check" "\
@@ -173,7 +178,7 @@ object or a file path.
 ;;;***
 
 ;;;### (autoloads nil "el-get/el-get-list-packages" "el-get/el-get-list-packages.el"
-;;;;;;  (22375 8383 159285 621000))
+;;;;;;  (22596 8971 633202 983000))
 ;;; Generated autoloads from el-get/el-get-list-packages.el
 
 (autoload 'el-get-list-packages "el-get/el-get-list-packages" "\
@@ -184,7 +189,7 @@ Display a list of packages.
 ;;;***
 
 ;;;### (autoloads nil "js-comint/js-comint" "js-comint/js-comint.el"
-;;;;;;  (22375 8348 743235 762000))
+;;;;;;  (22596 8570 832613 566000))
 ;;; Generated autoloads from js-comint/js-comint.el
 
 (autoload 'run-js "js-comint/js-comint" "\
@@ -269,7 +274,7 @@ Javascript source.
 ;;;;;;  "el-get/el-get-byte-compile.el" "el-get/el-get-core.el" "el-get/el-get-custom.el"
 ;;;;;;  "el-get/el-get-dependencies.el" "el-get/el-get-install.el"
 ;;;;;;  "el-get/el-get-methods.el" "el-get/el-get-notify.el" "el-get/el-get-recipes.el"
-;;;;;;  "el-get/el-get-status.el") (22375 8384 42938 734000))
+;;;;;;  "el-get/el-get-status.el") (22596 8972 656516 895000))
 
 ;;;***
 

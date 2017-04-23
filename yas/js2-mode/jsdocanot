@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: jsdoc
+# contributor: alex strzelewicz
+# key: @p
+# --
+@param {${1:string|integer|object|number}} ${2:name} ${3:description}

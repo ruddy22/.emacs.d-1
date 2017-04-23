@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: class
+# contributor: alex strzelewicz
+# key: class
+# --
+const EventEmitter = require('events');
+
+
+/**
+ * $1
+ * @extends EventEmitter
+ */
+class $2 extends EventEmitter {
+  constructor() {
+    super();
+  }
+
+  destroy() {
+  }
+}
