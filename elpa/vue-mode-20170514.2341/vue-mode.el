@@ -4,6 +4,7 @@
 
 ;; Author: codefalling <code.falling@gmail.com>
 ;; Keywords: languages
+;; Package-Version: 20170514.2341
 
 ;; Version: 0.2
 ;; Package-Requires: ((mmm-mode "0.5.4") (vue-html-mode "0.1") (ssass-mode "0.1"))
@@ -53,9 +54,8 @@
     (:type style :name css :mode css-mode)
     (:type style :name stylus :mode stylus-mode)
     (:type style :name less :mode less-css-mode)
-    (:type style :name postcss :mode css-mode)
-    (:type style :name scss :mode css-mode)
-    (:type style :name sass :mode css-mode))
+    (:type style :name scss :mode scss-mode)
+    (:type style :name sass :mode ssass-mode))
   "A list of vue component languages, their type, and their corresponding major modes"
   :type '(list (plist :type 'symbol :name 'symbol :mode 'function))
   :group 'vue)
@@ -77,7 +77,7 @@
            (class (make-symbol (format "vue-%s" name)))
            (front (if name (format "<%s +lang=\"%s\"\\( +scoped\\)? *>\n" type name)
                     (format "<%s\\( +scoped\\)? *>\n" type)))
-           (back (format "</%s *>" type)))
+           (back (format "^</%s *>" type)))
       (mmm-add-classes `((,class :submode ,mode :front ,front :back ,back)))
       (mmm-add-mode-ext-class 'vue-mode nil class)))
   (setq vue-initialized t))

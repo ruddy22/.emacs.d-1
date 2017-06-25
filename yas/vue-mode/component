@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: app.get
+# contributor: alex strzelewicz
+# key: component
+# --
+<template lang="html">
+  <div>
+  </div>
+</template>
+
+<script lang="js">
+  import API from '../api.js';
+
+  export default {
+    name: 'topbar',
+    data () {
+      return {
+        infos : null
+      }
+    },
+    mounted () {
+      this.infos = "good"
+    };
+  }
+</script>
+
+<style lang="css" scoped>
+</style>

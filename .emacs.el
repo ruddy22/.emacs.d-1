@@ -22,20 +22,40 @@
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 (el-get 'sync)
 
+;; Auto install packages
+(setq package-list '(rjsx-mode go-mode mmm-mode))
+
+;; Require Emacs' package functionality
+(require 'package)
+;; Add the Melpa repository to the list of package sources
+(setq package-archives '(("elpa" . "http://tromey.com/elpa/")
+                         ("melpa" . "https://melpa.org/packages/")
+                         ("melpa-stable" . "https://stable.melpa.org/packages/")
+                         ("elpa" . "http://tromey.com/elpa/")))
+
+;; Initialise the package system.
+(package-initialize)
+
+;; fetch the list of packages available
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; install the missing packages
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
+
+
+;;;;;;;;;;;;;;;; NORMAL ;;;;;;;;;;;;;;;
+
+
 ;; (split-window-horizontally)
 ;; (save-selected-window
 ;;   (other-window 1)
 ;;   (switch-to-buffer nil))
 
-;; Require Emacs' package functionality
-(require 'package)
-;; Add the Melpa repository to the list of package sources
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-;; Initialise the package system.
-(package-initialize)
 
-;; (require 'graphene)
-
+(add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
 
 (load-library "paren")
 (show-paren-mode 1)
@@ -201,17 +221,16 @@ line instead."
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/toml-mode"))
 (require 'toml-mode)
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/vue-html-mode"))
-(require 'vue-html-mode)
-
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/mmm-mode"))
-(require 'mmm-mode)
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/mmm-mode"))
+;; (require 'mmm-mode)
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/ssass-mode"))
 (require 'ssass-mode)
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vue-mode"))
 (require 'vue-mode)
+
+(setq mmm-submode-decoration-level 0)
 
 ;;
 ;; Python mod
@@ -239,10 +258,6 @@ line instead."
 ;;
 
 (add-to-list 'load-path "~/.emacs.d/js2-mode")
-
-
-
-
 (require 'js2-mode)
 
 ;;
@@ -662,3 +677,9 @@ line instead."
    (tty-set-up-initial-frame-faces))
 
 (setq frame-background-mode 'dark)
+
+;; Arduino
+
+(add-to-list 'load-path "~/.emacs.d/arduino-mode")
+(setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . arduino-mode) auto-mode-alist))
+(autoload 'arduino-mode "arduino-mode" "Arduino editing mode." t)
