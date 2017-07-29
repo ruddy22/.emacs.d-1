@@ -263,32 +263,32 @@ line instead."
 ;;
 ;; JSON mode base on js2-mode
 ;;
-(make-variable-buffer-local 'js2-parse-as-json)
-(defadvice js2-reparse (before json)
-  (setq js2-buffer-file-name buffer-file-name))
-(ad-activate 'js2-reparse)
+;; (make-variable-buffer-local 'js2-parse-as-json)
+;; (defadvice js2-reparse (before json)
+;;   (setq js2-buffer-file-name buffer-file-name))
+;; (ad-activate 'js2-reparse)
 
-(defadvice js2-parse-statement (around json)
-  (if (and (= tt js2-LC)
-           js2-buffer-file-name
-           (or js2-parse-as-json
-               (string-equal (substring js2-buffer-file-name -5) ".json"))
-           (eq (+ (save-excursion
-                    (goto-char (point-min))
-                    (back-to-indentation)
-                    (while (eolp)
-                      (next-line)
-                      (back-to-indentation))
-                    (point)) 1) js2-ts-cursor))
-      (setq ad-return-value (js2-parse-assign-expr))
-    ad-do-it))
-(ad-activate 'js2-parse-statement)
+;; (defadvice js2-parse-statement (around json)
+;;   (if (and (= tt js2-LC)
+;;            js2-buffer-file-name
+;;            (or js2-parse-as-json
+;;                (string-equal (substring js2-buffer-file-name -5) ".json"))
+;;            (eq (+ (save-excursion
+;;                     (goto-char (point-min))
+;;                     (back-to-indentation)
+;;                     (while (eolp)
+;;                       (next-line)
+;;                       (back-to-indentation))
+;;                     (point)) 1) js2-ts-cursor))
+;;       (setq ad-return-value (js2-parse-assign-expr))
+;;     ad-do-it))
+;; (ad-activate 'js2-parse-statement)
 
-(define-derived-mode json-mode js2-mode "JSON"
-  "Major mode for editing JSON data."
-  :group 'json
-  (setq js2-parse-as-json t)
-  (js2-reparse t))
+;; (define-derived-mode json-mode js2-mode "JSON"
+;;   "Major mode for editing JSON data."
+;;   :group 'json
+;;   (setq js2-parse-as-json t)
+;;   (js2-reparse t))
 
 (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
 (add-to-list 'auto-mode-alist '("\\.json5$" . json-mode))
@@ -450,46 +450,48 @@ line instead."
 ;;
 ;; Special Speedbar
 ;;
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/sr-speedbar"))
-(require 'sr-speedbar)
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/sr-speedbar"))
+;; (require 'sr-speedbar)
 
-(setq speedbar-hide-button-brackets-flag t
-      speedbar-show-unknown-files t
-      speedbar-smart-directory-expand-flag t
-      speedbar-use-images nil
-      speedbar-indentation-width 2
-      speedbar-update-flag t
-      sr-speedbar-width 35
-      sr-speedbar-width-x 35
-      sr-speedbar-auto-refresh nil
-      sr-speedbar-skip-other-window-p t
-      sr-speedbar-right-side nil)
+;; (setq speedbar-hide-button-brackets-flag t
+;;       speedbar-show-unknown-files t
+;;       speedbar-smart-directory-expand-flag t
+;;       speedbar-use-images nil
+;;       speedbar-indentation-width 2
+;;       speedbar-update-flag t
+;;       sr-speedbar-width 35
+;;       sr-speedbar-width-x 35
+;;       sr-speedbar-auto-refresh nil
+;;       sr-speedbar-skip-other-window-p t
+;;       sr-speedbar-right-side nil)
 
-(global-set-key (kbd "C-c p") 'sr-speedbar-toggle)
+;; (global-set-key (kbd "C-c p") 'sr-speedbar-toggle)
 
 
 ;; Always use the last selected window for loading files from speedbar.
-(defvar last-selected-window (selected-window))
-(defadvice select-window (after remember-selected-window activate)
-  "Remember the last selected window."
-  (unless (eq (selected-window) sr-speedbar-window)
-    (setq last-selected-window (selected-window))))
-
-(defun sr-speedbar-before-visiting-file-hook ()
-  "Function that hooks `speedbar-before-visiting-file-hook'."
-  (select-window last-selected-window))
-
-(defun sr-speedbar-before-visiting-tag-hook ()
-  "Function that hooks `speedbar-before-visiting-tag-hook'."
-  (select-window last-selected-window))
-
-(defun sr-speedbar-visiting-file-hook ()
-  "Function that hooks `speedbar-visiting-file-hook'."
-  (select-window last-selected-window))
-
-(defun sr-speedbar-visiting-tag-hook ()
-  "Function that hooks `speedbar-visiting-tag-hook'."
-  (select-window last-selected-window))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (defvar last-selected-window (selected-window))                    ;;
+;; (defadvice select-window (after remember-selected-window activate) ;;
+;;   "Remember the last selected window."                             ;;
+;;   (unless (eq (selected-window) sr-speedbar-window)                ;;
+;;     (setq last-selected-window (selected-window))))                ;;
+;;                                                                    ;;
+;; (defun sr-speedbar-before-visiting-file-hook ()                    ;;
+;;   "Function that hooks `speedbar-before-visiting-file-hook'."      ;;
+;;   (select-window last-selected-window))                            ;;
+;;                                                                    ;;
+;; (defun sr-speedbar-before-visiting-tag-hook ()                     ;;
+;;   "Function that hooks `speedbar-before-visiting-tag-hook'."       ;;
+;;   (select-window last-selected-window))                            ;;
+;;                                                                    ;;
+;; (defun sr-speedbar-visiting-file-hook ()                           ;;
+;;   "Function that hooks `speedbar-visiting-file-hook'."             ;;
+;;   (select-window last-selected-window))                            ;;
+;;                                                                    ;;
+;; (defun sr-speedbar-visiting-tag-hook ()                            ;;
+;;   "Function that hooks `speedbar-visiting-tag-hook'."              ;;
+;;   (select-window last-selected-window))                            ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;;
@@ -648,9 +650,9 @@ line instead."
 (defalias 'pipe 'shell-command-on-region)
 
 
-(defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
-  "Prevent annoying \"Active processes exist\" query when you quit Emacs."
-  (flet ((process-list ())) ad-do-it))
+;; (defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
+;;   "Prevent annoying \"Active processes exist\" query when you quit Emacs."
+;;   (flet ((process-list ())) ad-do-it))
 
 (setq-default tab-width 2)
 ;;

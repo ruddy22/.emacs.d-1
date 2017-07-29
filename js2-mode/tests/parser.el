@@ -501,6 +501,9 @@ the test."
 (js2-deftest-parse async-arrow-function-expression
   "a = async (b) => {  b;\n};")
 
+(js2-deftest-parse async-arrow-function-without-parens
+  "a = async b => 3;" :reference "a = async (b) => {3};")
+
 (js2-deftest-parse async-method-in-object-literal
   "({async f() {}});")
 
@@ -1252,6 +1255,10 @@ the test."
   "function foo() { let {a, b, c = 3} = {a: 1, b: 2}; }"
   '("foo@10:U" "a@23:U" "b@26:U" "c@29:U"))
 
+(js2-deftest-classify-variables destructure-object-missing
+  "function foo() { let {foo: missing = 10} = {}; }"
+  '("foo@10:U" "missing@28:U"))
+
 ;; Side effects
 
 (js2-deftest no-side-effects-at-top-level
@@ -1288,3 +1295,8 @@ the test."
   (let ((js2-instanceof-has-side-effects t))
     (js2-mode--and-parse)
     (should (null js2-parsed-warnings))))
+
+(js2-deftest await-has-side-effects
+  "const p = new Promise();\nasync function f() { await p; return null; }"
+  (js2-mode--and-parse)
+  (should (null js2-parsed-warnings)))
