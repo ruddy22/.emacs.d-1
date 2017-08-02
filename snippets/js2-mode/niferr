@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: niferr
+# contributor: alex strzelewicz
+# key: niferr
+# --
+if (err) return res.send(500, err);
+return res.send($1);

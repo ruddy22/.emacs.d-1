@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: ngwatch
+# contributor: alex strzelewicz
+# key: ngwatch
+# --
+$scope.$watch('$1', function(aft, bef) {
+  if (aft == bef) return;
+  $2
+});

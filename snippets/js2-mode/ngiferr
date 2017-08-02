@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: ngiferr
+# contributor: alex strzelewicz
+# key: ngiferr
+# --
+if (err) $log.error('$1');

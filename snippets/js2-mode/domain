@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: domain
+# contributor: alex strzelewicz
+# key: dom
+# --
+var d = require('domain').create();
+
+d.on('error', function(er) {
+  console.error(er);
+});
+
+d.run(function() {
+});

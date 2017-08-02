@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: rcb
+# contributor: alex strzelewicz
+# key: rcb
+# --
+return cb(null, ${1:{}});

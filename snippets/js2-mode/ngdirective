@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: ngdirective
+# contributor: alex strzelewicz
+# key: ngdirective
+# --
+/**
+ * @doc directive
+ * @id $1:$2
+ *
+ * @description $3
+ * @author Alexandre Strzelewicz <as@unitech.io>
+ */
+${1:moduleName}.directive('directive.${2:directiveName}', [
+  '$log',
+  function($log) {
+    var $2 = {
+      	restrict : 'E',
+	replace : true,
+	scope : {
+          $4
+        },
+	template : '<span></span>'
+    };
+
+    $2.controller = [
+      '$scope',
+      '$log',
+      function($scope, $log) {
+      }
+    ];
+
+    $2.link = function(scope, el, attrs) {
+    };
+
+    return $2;
+}]);

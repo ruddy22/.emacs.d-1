@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: ngq
+# contributor: alex strzelewicz
+# key: ngq
+# --
+var deferred = $q.defer();
+deferred.resolve(user);
+deferred.reject(err);
+return deferred.promise;

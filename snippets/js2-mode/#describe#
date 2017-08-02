@@ -1,0 +1,11 @@
+
+# -*- mode: snippet -*-
+# name: describe
+# contributor: alex strzelewicz
+# key: desc
+# --
+describe('$1', function() {
+    it('should $2', function() {
+        $3
+    }); 
+});

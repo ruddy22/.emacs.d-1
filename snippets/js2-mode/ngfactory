@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: ngfactory
+# contributor: alex strzelewicz
+# key: ngfactory
+# --
+/**
+ * @doc service
+ * @id $1:$2
+ *
+ * @description $3
+ * @author Alexandre Strzelewicz <as@unitech.io>
+ */
+${1:moduleName}.factory('${2:serviceName}', ['$http', '$log', function($http, $log) {
+    var $2 = {};
+
+    $2.all = function(cb) {
+        $http.get('/api/resources/item')
+    .success(function(items) {
+      return cb(null, items);
+    })
+    .error(function(err) {
+      $log.error(err);
+      return cb(err);
+    });
+      $4
+    };
+
+    return $2;
+}]);

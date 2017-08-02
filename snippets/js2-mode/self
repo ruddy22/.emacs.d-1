@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: self
+# contributor: alex strzelewicz
+# key: self
+# --
+var self = this;

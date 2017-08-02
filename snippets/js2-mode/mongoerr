@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: mongoerr
+# contributor: alex strzelewicz
+# key: mongoerr
+# --
+if (err) return next(err);

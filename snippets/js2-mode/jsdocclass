@@ -1,8 +1,9 @@
 # -*- mode: snippet -*-
-# name: jdoc
+# name: jsdosadc
 # contributor: alex strzelewicz
-# key: jdoc
+# key: jsdoc
 # --
 /**
- * $1
+ * ${1:comment}
+ * @param {${2:string|integer|object|number}} ${3:name} ${4:description}
  */

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: bef
+# contributor: alex strzelewicz
+# key: bef
+# --
+before(function(done) {
+  $2
+  done();
+});

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: cberr
+# contributor: alex strzelewicz
+# key: cberr
+# --
+if (err) { console.error(err); return cb(err); }
+$1
+return false;

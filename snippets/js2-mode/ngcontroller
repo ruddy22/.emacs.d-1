@@ -6,10 +6,15 @@
 /**
  * @doc controller
  * @id $1:$2
- * 
- * @description $3
+ * @view $3
+ * @description $4
  * @author Alexandre Strzelewicz <as@unitech.io>
  */
-${1:moduleName}.controller('${2:controllerName}', ['$scope', '$location', function($scope, $location) {
-    $4
-}]);
+${1:moduleName}.controller('${2:controllerName}', [
+  '$scope',
+  '$location',
+  '$log',
+  function($scope, $location, $log) {
+    $5
+  }
+]);

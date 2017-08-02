@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: ngmodule
+# name: ngmod
 # contributor: alex strzelewicz
 # key: ngmodule
 # --
@@ -14,3 +14,11 @@
  */
 
 var ${1:moduleName} = angular.module('$1', []);
+
+$1.constant('version', '0.1');
+
+$1.config(function() { 
+});
+
+$1.run(function() { 
+});

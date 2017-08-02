@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: miferr
+# contributor: alex strzelewicz
+# key: miferr
+# --
+if (err) return next(err);

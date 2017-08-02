@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: remove
+# contributor: alex strzelewicz
+# key: remove
+# --
+$1.find

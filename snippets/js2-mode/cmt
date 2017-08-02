@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: cmt
+# contributor: alex strzelewicz
+# key: cmt
+# --
+/**
+ * $1
+ */

@@ -2,7 +2,10 @@
 ;;
 ;; Configured by Strzelewicz Alexandre
 ;; https://github.com/Unitech/.emacs.d
+;; Compatible with Emacs 25.x
 ;;
+;; For MacOSx do not forget to add Keyboard action in iterm2
+;; for forward-paragraph and backward-paragraph
 
 ;; (add-to-list 'custom-theme-load-path
 ;;  (expand-file-name "~/.emacs.d/themes/"))
@@ -53,7 +56,7 @@
 ;; (save-selected-window
 ;;   (other-window 1)
 ;;   (switch-to-buffer nil))
-
+(setq mac-command-modifier 'control)
 
 (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
 
@@ -140,12 +143,24 @@ line instead."
   (interactive)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 
+
 (global-set-key (kbd "C-c g") 'goto-line)
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-c v") 'toggle-comment-on-line)
 (global-set-key (kbd "C-c C-c") 'comment-box)
+(global-set-key (kbd "C-<up>") 'backward-paragraph)
+(global-set-key (kbd "<C-down>") 'forward-paragraph)
+(global-set-key (kbd "C-c a") 'my-align-single-equals)
 
-(global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y")
+;;
+;; Resize window
+;;
+(global-set-key (kbd "<f5>") 'shrink-window-horizontally)
+(global-set-key (kbd "<f6>") 'enlarge-window-horizontally)
+(global-set-key (kbd "<f7>") 'shrink-window)
+(global-set-key (kbd "<f8>") 'enlarge-window)
+
+;;(global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y")
 
 ;;
 ;; Fly between window
@@ -245,12 +260,12 @@ line instead."
 ;;
 ;; AUTO tab
 ;;
-(add-hook 'css-mode-hook '(lambda ()
-                            (local-set-key (kbd "RET") 'newline-and-indent)
-                            ))
-(add-hook 'html-mode-hook '(lambda ()
-                             (local-set-key (kbd "RET") 'newline-and-indent)
-                             ))
+;; (add-hook 'css-mode-hook '(lambda ()
+;;                             (local-set-key (kbd "RET") 'newline-and-indent)
+;;                             ))
+;; (add-hook 'html-mode-hook '(lambda ()
+;;                              (local-set-key (kbd "RET") 'newline-and-indent)
+;;                              ))
 
 
 ;;
@@ -290,7 +305,7 @@ line instead."
 ;;   (setq js2-parse-as-json t)
 ;;   (js2-reparse t))
 
-(add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.json5$" . json-mode))
 
 (add-to-list 'auto-mode-alist '("\\.ejs$" . html-mode))
@@ -422,14 +437,6 @@ line instead."
 (setq typescript-indent-level 2)
 
 ;;
-;; Resize window
-;;
-(global-set-key (kbd "<f5>") 'shrink-window-horizontally)
-(global-set-key (kbd "<f6>") 'enlarge-window-horizontally)
-(global-set-key (kbd "<f7>") 'shrink-window)
-(global-set-key (kbd "<f8>") 'enlarge-window)
-
-;;
 ;; Remove menu bar
 ;;
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -439,12 +446,12 @@ line instead."
 ;;
 ;; Highlight the current line
 ;;
-;;(global-hl-line-mode)
-;;(set-face-background hl-line-face "#0000ee")
+(global-hl-line-mode)
+(set-face-background hl-line-face "#222")
 ;; (require 'highlight-current-line)
 ;; (highlight-current-line-on t)
 ;; To customize the background color
-;;(set-face-background 'highlight-current-line-face "#010101")
+;; (set-face-background 'highlight-current-line-face "#010101")
 
 
 ;;
@@ -544,8 +551,8 @@ line instead."
 
 (add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
 (require 'yasnippet)
-(setq yas-snippet-dirs "~/.emacs.d/yas/")
 (yas-global-mode 1)
+;;(setq yas-snippet-dirs "~/.emacs.d/yas/")
 
 ;;
 ;; Emacs core fix
@@ -591,8 +598,6 @@ line instead."
   (align-regexp
    (region-beginning) (region-end)
    "\\(\\s-*\\) = " 1 0 nil))
-
-(global-set-key (kbd "C-c a") 'my-align-single-equals)
 
 ;;
 ;; js-commint

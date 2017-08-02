@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: smet
+# contributor: alex strzelewicz
+# key: smet
+# --
+
+/**
+ * @swagger
+ * path: $1
+ * operations:
+ *   -  httpMethod: ${2:GET|POST|PUT|DELETE}
+ *      summary: $3
+ *      notes: $4
+ *      nickname: $5
+ *      responseClass: ${6:complex object defined as model}
+ *      responseMessages:
+ *        - code: $7
+ *          message: $8
+ *      consumes:
+ *        - application/json
+ *      parameters:
+ *        - name: $9
+ *          description: $10
+ *          paramType: ${11:path|query|body}
+ *          required: $12
+ *          dataType: ${13:string|integer|complex}
+ *
+ */
