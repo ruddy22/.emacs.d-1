@@ -10,6 +10,35 @@
 ;; (add-to-list 'custom-theme-load-path
 ;;  (expand-file-name "~/.emacs.d/themes/"))
 
+
+;; BASE
+(setq initial-scratch-message "⌬ keymetrics.io pimped emacs")
+(setq inhibit-startup-message t)
+(setq require-final-newline t)
+(setq frame-title-format "%S: %f")
+(modify-frame-parameters nil '((wait-for-wm . nil)))
+(fset 'yes-or-no-p 'y-or-n-p)
+(icomplete-mode 1)
+(setq column-number-mode t)
+(setq display-time-string-forms '((format "[%s:%s]-[%s/%s/%s] " 24-hours minutes day month year)))
+(setq scroll-preserve-screen-position t)
+(add-hook 'save-buffer-hook 'delete-trailing-whitespace)
+(setq make-backup-files nil)
+(setq backup-directory-alist `(("." . "~/.saves")))
+(setq delete-auto-save-files t)
+(global-font-lock-mode t)
+(setq-default indicate-empty-lines t)
+(transient-mark-mode t)
+(column-number-mode t)
+(setq standard-indent 2)
+(setq-default indent-tabs-mode nil)
+(global-set-key "\M- " 'hippie-expand)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(setq mac-command-modifier 'control)
+
+;;(set-language-environment "UTF-8")
+
+
 ;;
 ;; el-get
 ;;
@@ -49,77 +78,14 @@
     (package-install package)))
 
 
-;;;;;;;;;;;;;;;; NORMAL ;;;;;;;;;;;;;;;
-
-
-;; (split-window-horizontally)
-;; (save-selected-window
-;;   (other-window 1)
-;;   (switch-to-buffer nil))
-(setq mac-command-modifier 'control)
-
-(add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
-
-(load-library "paren")
-(show-paren-mode 1)
-;;
-;; DISABLE BACKUP FILES
-;;
-(setq make-backup-files nil)
-(setq backup-directory-alist `(("." . "~/.saves")))
-
-(setq delete-auto-save-files t)
-(global-font-lock-mode t)
-(setq-default indicate-empty-lines t)
-(transient-mark-mode t)
-(column-number-mode t)
-(setq standard-indent 2)
-(setq-default indent-tabs-mode nil)
-(global-set-key "\M- " 'hippie-expand)
-
-;;(set-language-environment "UTF-8")
-
-
 ;;
 ;; COLORS
 ;;
 (set-cursor-color "Red")
 (set-face-background 'region "#666")
-(set-face-background 'show-paren-match-face "Blue")
-(set-face-background 'show-paren-mismatch-face "Magenta")
-(set-face-foreground 'show-paren-mismatch-face "Red")
-
-
-;;
-;; MISC
-;;
-(setq inhibit-startup-message t)
-(setq require-final-newline t)
-(setq frame-title-format "%S: %f")
-(modify-frame-parameters nil '((wait-for-wm . nil)))
-(fset 'yes-or-no-p 'y-or-n-p)
-(icomplete-mode 1)
-(setq column-number-mode t)
-(setq display-time-string-forms '((format "[%s:%s]-[%s/%s/%s] " 24-hours minutes day month year)))
-(setq scroll-preserve-screen-position t)
-(add-hook 'save-buffer-hook 'delete-trailing-whitespace)
-
-
-;;
-;; Better color for mini-buffer
-;;
 (set-face-foreground 'minibuffer-prompt "#33FFFF")
-
-
-;;
-;; Nicer file
-;;
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-
-;; (add-to-list 'load-path "~/.emacs.d/autopair")
-;; (require 'autopair)
-;; (autopair-global-mode)
+(global-hl-line-mode)
+(set-face-background hl-line-face "#222")
 
 ;;
 ;; Smarter emacs
@@ -142,7 +108,6 @@ line instead."
   "comment or uncomment current line"
   (interactive)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
-
 
 (global-set-key (kbd "C-c g") 'goto-line)
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
@@ -168,9 +133,11 @@ line instead."
 (windmove-default-keybindings 'meta)
 
 ;;
-;; Default message
+;; MISC
 ;;
-(setq initial-scratch-message "⌬ keymetrics.io pimped emacs")
+(add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
+(load-library "paren")
+(show-paren-mode 1)
 
 ;;
 ;; IDO
@@ -205,24 +172,6 @@ line instead."
            (lambda ()
              (make-local-variable 'resize-minibuffer-window-max-height)
              (setq resize-minibuffer-window-max-height 1))))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;(add-to-list 'load-path "~/.emacs.d/")
-;;
-;; nginxmode
-;;
-;;(require 'nginx-mode)
-
-;;
-;; Org mode
-;;
-;; (require 'org)
-;; (setq org-log-done t)
-;; (setq org-todo-keywords
-;;       '((sequence "TODO" "INPROGRESS" "DONE")))
-;; (setq org-todo-keyword-faces
-;;       '(("INPROGRESS" . (:foreground "blue" :weight bold))))
-
 
 ;;
 ;; shell-toggle-cd
@@ -257,96 +206,18 @@ line instead."
                                    interpreter-mode-alist))
 (autoload 'python-mode "python-mode" "Python editing mode." )
 
-;;
-;; AUTO tab
-;;
-;; (add-hook 'css-mode-hook '(lambda ()
-;;                             (local-set-key (kbd "RET") 'newline-and-indent)
-;;                             ))
-;; (add-hook 'html-mode-hook '(lambda ()
-;;                              (local-set-key (kbd "RET") 'newline-and-indent)
-;;                              ))
-
-
-;;
-;; Binding
-;;
-
+;; JS2-MODE (JAVASCRIPT)
 (add-to-list 'load-path "~/.emacs.d/js2-mode")
 (require 'js2-mode)
-
-;;
-;; JSON mode base on js2-mode
-;;
-;; (make-variable-buffer-local 'js2-parse-as-json)
-;; (defadvice js2-reparse (before json)
-;;   (setq js2-buffer-file-name buffer-file-name))
-;; (ad-activate 'js2-reparse)
-
-;; (defadvice js2-parse-statement (around json)
-;;   (if (and (= tt js2-LC)
-;;            js2-buffer-file-name
-;;            (or js2-parse-as-json
-;;                (string-equal (substring js2-buffer-file-name -5) ".json"))
-;;            (eq (+ (save-excursion
-;;                     (goto-char (point-min))
-;;                     (back-to-indentation)
-;;                     (while (eolp)
-;;                       (next-line)
-;;                       (back-to-indentation))
-;;                     (point)) 1) js2-ts-cursor))
-;;       (setq ad-return-value (js2-parse-assign-expr))
-;;     ad-do-it))
-;; (ad-activate 'js2-parse-statement)
-
-;; (define-derived-mode json-mode js2-mode "JSON"
-;;   "Major mode for editing JSON data."
-;;   :group 'json
-;;   (setq js2-parse-as-json t)
-;;   (js2-reparse t))
-
-(add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
-(add-to-list 'auto-mode-alist '("\\.json5$" . json-mode))
-
-(add-to-list 'auto-mode-alist '("\\.ejs$" . html-mode))
-;;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-hook 'js-mode-hook 'js2-minor-mode)
+(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json5$" . json-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
-
-(add-hook 'js2-mode-hook '(lambda ()
-                            (local-set-key (kbd "RET") 'newline-and-indent)
-                            ))
-
-
-
+(add-hook 'js2-mode-hook '(lambda () (local-set-key (kbd "RET") 'newline-and-indent)))
 (custom-set-variables '(js2-strict-missing-semi-warning nil))
 (custom-set-variables '(js2-missing-semi-one-line-override t))
 (custom-set-variables '(js2-strict-inconsistent-return-warning nil))
-
-;;
-;; Autopair mode for javascript (js2-mode)
-;;
-;; (eval-after-load "autopair-autoloads"
-;;   '(progn
-;;      (require 'autopair)))
-;; (eval-after-load "autopair"
-;;   '(progn
-;;      (autopair-global-mode 1)
-;;      (setq my-autopair-off-modes '(
-;;                                    ;; js2-mode
-;;                                    ))
-;;      (dolist (m my-autopair-off-modes)
-;;        (add-hook (intern (concat (symbol-name m) "-hook"))
-;;                  #'(lambda () (setq autopair-dont-activate t))))
-;;      ))
-;; (eval-after-load "js2-mode"
-;;   '(progn
-;;      (if (and (boundp 'my-autopair-off-modes)
-;;               (not (memq 'js2-mode my-autopair-off-modes)))
-;;          (setq js2-mirror-mode nil))
-;;      ))
-
-
 (eval-after-load "js2-mode"
   '(progn
      (setq js2-missing-semi-one-line-override t)
@@ -368,9 +239,10 @@ line instead."
                   (rx (* " ") "," (* " ")) t))
            )))
      (add-hook 'js2-post-parse-callbacks 'my-add-jslint-declarations)))
-
-
 (setq js2-use-font-lock-faces t)
+
+;; HTML
+(add-to-list 'auto-mode-alist '("\\.ejs$" . html-mode))
 
 
 ;;
@@ -405,7 +277,6 @@ line instead."
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/web-mode"))
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.hbs$" . web-mode))
-
 
 ;;
 ;; SASS
@@ -443,11 +314,6 @@ line instead."
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
-;;
-;; Highlight the current line
-;;
-(global-hl-line-mode)
-(set-face-background hl-line-face "#222")
 ;; (require 'highlight-current-line)
 ;; (highlight-current-line-on t)
 ;; To customize the background color
