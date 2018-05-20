@@ -50,8 +50,7 @@
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 (el-get 'sync)
 
-;;(setq package-list '(python-mode markdown-mode go-mode mmm-mode))
-(setq package-list '(go-mode))
+(setq package-list '(smart-mode-line go-mode markdown-mode))
 
 ;; Require Emacs' package functionality
 (require 'package)
@@ -81,12 +80,7 @@
                :load "js2-mode.el"
                :compile ("js2-mode.el")
                :features js2-mode)
-        (:name js-comint
-               :type git
-               :url "git://github.com/redguardtoo/js-comint.git"
-               :load "js-comint.el"
-               :compile ("js-coming.el")
-               :features js-comint)))
+        ))
 
 (setq my-el-get-packages
       (append
@@ -100,6 +94,10 @@
 ;; Auto install packages
 
 
+;; SMART LINE
+(setq sml/no-confirm-load-theme t)
+(setq sml/theme 'dark)
+(sml/setup)
 
 
 
@@ -111,6 +109,7 @@
 (set-face-foreground 'minibuffer-prompt "#33FFFF")
 (global-hl-line-mode)
 (set-face-background hl-line-face "#222")
+
 
 ;;
 ;; Smarter emacs
@@ -249,9 +248,21 @@ line instead."
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 (add-hook 'js2-mode-hook '(lambda () (local-set-key (kbd "RET") 'newline-and-indent)))
-(custom-set-variables '(js2-strict-missing-semi-warning nil))
-(custom-set-variables '(js2-missing-semi-one-line-override t))
-(custom-set-variables '(js2-strict-inconsistent-return-warning nil))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "5008a5c8985fda9803ff9d02bc2a56b45407ccc251ff85a817e9dfe7f345ffe5" default)))
+ '(js2-missing-semi-one-line-override t)
+ '(js2-strict-inconsistent-return-warning nil)
+ '(js2-strict-missing-semi-warning nil)
+ '(max-lisp-eval-depth 5000)
+ '(max-specpdl-size 50000))
+
+
 (eval-after-load "js2-mode"
   '(progn
      (setq js2-missing-semi-one-line-override t)
@@ -384,14 +395,7 @@ line instead."
 ;;
 ;; Emacs core fix
 ;;
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("5008a5c8985fda9803ff9d02bc2a56b45407ccc251ff85a817e9dfe7f345ffe5" default)))
- '(max-lisp-eval-depth 5000)
- '(max-specpdl-size 50000))
+
 
 ;;
 ;; Jade mode
@@ -427,9 +431,11 @@ line instead."
 ;;
 ;; js-commint
 ;;
-
+(add-to-list 'load-path "~/.emacs.d/js-commint")
 (require 'js-comint)
 (setq inferior-js-program-command "node") ;; not "node-repl"
+
+
 ;; Use your favorited js mode here:
 (add-hook 'js2-mode-hook '(lambda ()
                             (local-set-key "\C-x\C-e"
