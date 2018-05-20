@@ -1,8 +1,8 @@
 ;;; mmm-compat.el --- MMM Hacks for compatibility with other Emacsen
 
-;; Copyright (C) 2000 by Michael Abraham Shulman
+;; Copyright (C) 2000, 2003, 2011, 2013  Free Software Foundation, Inc.
 
-;; Author: Michael Abraham Shulman <viritrilbia@users.sourceforge.net>
+;; Author: Michael Abraham Shulman <viritrilbia@gmail.com>
 
 ;;{{{ GPL
 
@@ -31,8 +31,6 @@
 ;; almost perfectly in XEmacs 21.
 
 ;;; Code:
-
-(require 'cl)
 
 ;;{{{ Emacsen Detection
 
@@ -116,6 +114,16 @@ This text should not be modified."
        (set-buffer (generate-new-buffer ,name))
        (insert-buffer ,buffer)
        (current-buffer))))
+
+;;}}}
+;;{{{ Emacs < 26 requires namespaced CL functions
+
+(if (>= emacs-major-version 26)
+    (defalias 'mmm-mapcan 'mapcan)
+  (require 'cl-lib)
+  (defalias 'mmm-mapcan 'cl-mapcan))
+
+;;}}}
 
 (provide 'mmm-compat)
 

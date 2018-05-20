@@ -1,4 +1,3 @@
-
 ;;
 ;; Configured by Strzelewicz Alexandre
 ;; https://github.com/Unitech/.emacs.d
@@ -6,13 +5,10 @@
 ;;
 ;; For MacOSx do not forget to add Keyboard action in iterm2
 ;; for forward-paragraph and backward-paragraph
-
-;; (add-to-list 'custom-theme-load-path
-;;  (expand-file-name "~/.emacs.d/themes/"))
-
+;;
 
 ;; BASE
-(setq initial-scratch-message "⌬ keymetrics.io pimped emacs")
+(setq initial-scratch-message "⌬  Code the Future.")
 (setq inhibit-startup-message t)
 (setq require-final-newline t)
 (setq frame-title-format "%S: %f")
@@ -54,8 +50,8 @@
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 (el-get 'sync)
 
-;; Auto install packages
-(setq package-list '(rjsx-mode go-mode mmm-mode))
+;;(setq package-list '(python-mode markdown-mode go-mode mmm-mode))
+(setq package-list '(go-mode))
 
 ;; Require Emacs' package functionality
 (require 'package)
@@ -76,6 +72,35 @@
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
+
+
+(setq el-get-sources
+      '((:name js2-mode
+               :type git
+               :url "git://github.com/mooz/js2-mode.git"
+               :load "js2-mode.el"
+               :compile ("js2-mode.el")
+               :features js2-mode)
+        (:name js-comint
+               :type git
+               :url "git://github.com/redguardtoo/js-comint.git"
+               :load "js-comint.el"
+               :compile ("js-coming.el")
+               :features js-comint)))
+
+(setq my-el-get-packages
+      (append
+       '(js-comint js2-mode)
+       (mapcar 'el-get-source-name el-get-sources)))
+
+(el-get 'sync my-el-get-packages)
+
+;;(setq warning-minimum-level :emergency)
+
+;; Auto install packages
+
+
+
 
 
 ;;
@@ -179,36 +204,45 @@ line instead."
 (autoload 'shell-toggle-cd "~/.emacs.d/shell-toggle.el"
   "Pops up a shell-buffer and insert a \"cd <file-dir>\" command." t)
 
-;;
-;; TOML
-;;
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/toml-mode"))
-(require 'toml-mode)
+;; ;;
+;; ;; TOML
+;; ;;
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/toml-mode"))
+;; (require 'toml-mode)
 
-;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/mmm-mode"))
-;; (require 'mmm-mode)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  VUE MODE!
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Set Indent for CSS MODE! :))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/mmm-mode"))
+(require 'mmm-mode)
+(setq mmm-submode-decoration-level 0)
+
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/vue-html-mode"))
+(require 'vue-html-mode)
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/ssass-mode"))
 (require 'ssass-mode)
-
+(setq css-indent-offset 2)
+(setq indent-tabs-mode nil
+      js-indent-level 2)
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/edit-indirect"))
+(require 'edit-indirect)
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vue-mode"))
 (require 'vue-mode)
 
-(setq mmm-submode-decoration-level 0)
 
 ;;
 ;; Python mod
 ;;
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/python-mode"))
-(require 'python-mode)
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/python-mode"))
+;; (require 'python-mode)\
 (setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
 (setq interpreter-mode-alist (cons '("python" . python-mode)
                                    interpreter-mode-alist))
 (autoload 'python-mode "python-mode" "Python editing mode." )
 
 ;; JS2-MODE (JAVASCRIPT)
-(add-to-list 'load-path "~/.emacs.d/js2-mode")
-(require 'js2-mode)
 (add-hook 'js-mode-hook 'js2-minor-mode)
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json5$" . json-mode))
@@ -252,18 +286,18 @@ line instead."
 ;; (require 'rinari)
 
 ;;
-;; ERB & co
-;;
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/rhtml-minor-mode"))
-(require 'rhtml-mode)
-
-;;
 ;; YAML
 ;;
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/yaml-mode"))
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+
+;;
+;; NGINX files
+;;
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/nginx-mode"))
+(require 'nginx-mode)
 
 ;;
 ;; HAML
@@ -287,23 +321,17 @@ line instead."
 ;;
 ;; MARKDOWN
 ;;
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/markdown-mode"))
-(require 'markdown-mode)
-(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
-;;
-;; Coffeescript
-;;
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/coffee-mode"))
-(require 'coffee-mode)
-(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
-
+(autoload 'gfm-mode "markdown-mode"
+  "Major mode for editing GitHub Flavored Markdown files" t)
+(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 ;;
 ;; Typescript
 ;;
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/typescript"))
-(require 'typescript)
 (add-to-list 'auto-mode-alist '("\\.ts$" . typescript-mode))
 (setq typescript-indent-level 2)
 
@@ -321,53 +349,6 @@ line instead."
 
 
 ;;
-;; Special Speedbar
-;;
-;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/sr-speedbar"))
-;; (require 'sr-speedbar)
-
-;; (setq speedbar-hide-button-brackets-flag t
-;;       speedbar-show-unknown-files t
-;;       speedbar-smart-directory-expand-flag t
-;;       speedbar-use-images nil
-;;       speedbar-indentation-width 2
-;;       speedbar-update-flag t
-;;       sr-speedbar-width 35
-;;       sr-speedbar-width-x 35
-;;       sr-speedbar-auto-refresh nil
-;;       sr-speedbar-skip-other-window-p t
-;;       sr-speedbar-right-side nil)
-
-;; (global-set-key (kbd "C-c p") 'sr-speedbar-toggle)
-
-
-;; Always use the last selected window for loading files from speedbar.
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (defvar last-selected-window (selected-window))                    ;;
-;; (defadvice select-window (after remember-selected-window activate) ;;
-;;   "Remember the last selected window."                             ;;
-;;   (unless (eq (selected-window) sr-speedbar-window)                ;;
-;;     (setq last-selected-window (selected-window))))                ;;
-;;                                                                    ;;
-;; (defun sr-speedbar-before-visiting-file-hook ()                    ;;
-;;   "Function that hooks `speedbar-before-visiting-file-hook'."      ;;
-;;   (select-window last-selected-window))                            ;;
-;;                                                                    ;;
-;; (defun sr-speedbar-before-visiting-tag-hook ()                     ;;
-;;   "Function that hooks `speedbar-before-visiting-tag-hook'."       ;;
-;;   (select-window last-selected-window))                            ;;
-;;                                                                    ;;
-;; (defun sr-speedbar-visiting-file-hook ()                           ;;
-;;   "Function that hooks `speedbar-visiting-file-hook'."             ;;
-;;   (select-window last-selected-window))                            ;;
-;;                                                                    ;;
-;; (defun sr-speedbar-visiting-tag-hook ()                            ;;
-;;   "Function that hooks `speedbar-visiting-tag-hook'."              ;;
-;;   (select-window last-selected-window))                            ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-;;
 ;; Smart paste (auto indent paste)
 ;;
 (dolist (command '(yank yank-pop))
@@ -376,7 +357,7 @@ line instead."
                 (member major-mode '(emacs-lisp-mode lisp-mode
                                                      clojure-mode    scheme-mode
                                                      haskell-mode    ruby-mode
-                                                     rspec-mode      python-mode
+                                                     rspec-mode
                                                      c-mode          c++-mode
                                                      js2-mode css-mode
                                                      html-mode
@@ -385,31 +366,11 @@ line instead."
                 (let ((mark-even-if-inactive transient-mark-mode))
                   (indent-region (region-beginning) (region-end) nil))))))
 
-
+;;
+;; IDO do not prefix double buffer name with <number>
+;;
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
-
-;;
-;; Autocomplete mode
-;;
-;; (add-to-list 'load-path "~/.emacs.d/popup-0.5")
-;; (add-to-list 'load-path "~/.emacs.d/ac")
-;; (require 'auto-complete-config)
-;; (ac-config-default)
-;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac/ac-dict")
-;; (global-auto-complete-mode t)
-;; (setq ac-auto-start 2)
-;; (setq ac-ignore-case nil)
-;; (add-to-list 'load-path "~/.emacs.d/auto-complete-1.4")
-;; (require 'auto-complete-config)
-;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-;; (setq-default ac-sources (add-to-list 'ac-sources 'ac-source-dictionary))
-;; (global-auto-complete-mode t)
-;;                                         ; Start auto-completion after 2 characters of a word
-;; (setq ac-auto-start 2)
-;;                                         ; case sensitivity is important when finding matches
-;; (setq ac-ignore-case nil)
-
 
 ;;
 ;; Yasnippet
@@ -435,15 +396,13 @@ line instead."
 ;;
 ;; Jade mode
 ;;
-(add-to-list 'load-path "~/.emacs.d/jade-mode-2")
 (add-to-list 'load-path "~/.emacs.d/sws-mode")
 (add-to-list 'load-path "~/.emacs.d/stylus-mode")
 (require 'sws-mode)
-(require 'jade-mode)
 (require 'stylus-mode)
 
 (add-to-list 'auto-mode-alist '("\\.styl$" . stylus-mode))
-(add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+;;(add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
 (add-to-list 'auto-mode-alist '("\\.pug$" . jade-mode))
 
 ;;
@@ -485,6 +444,7 @@ line instead."
                                            'js-load-file-and-go)
                             ))
 
+
 (setq inferior-js-mode-hook
       (lambda ()
         ;; We like nice colors
@@ -496,17 +456,6 @@ line instead."
            (replace-regexp-in-string "\033\\[[0-9]+[GK]" "" output)))))
 
 (setenv "NODE_NO_READLINE" "1")
-
-;;
-;; Agressive JS3 Mode
-;;
-;; (require 'js3-mode)
-;; (custom-set-variables
-;;  '(js3-auto-indent-p t)         ; it's nice for commas to right themselves.
-;;  '(js3-enter-indents-newline t) ; don't need to push tab before typing
-;;  '(js3-indent-on-enter-key t)
-;;  '(js3-indent-dots t)
-;;  )
 
 (add-to-list 'load-path "~/.emacs.d/flymake-cursor")
 (require 'flymake-cursor)
@@ -553,6 +502,6 @@ line instead."
 
 ;; Arduino
 
-(add-to-list 'load-path "~/.emacs.d/arduino-mode")
-(setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . arduino-mode) auto-mode-alist))
-(autoload 'arduino-mode "arduino-mode" "Arduino editing mode." t)
+;; (add-to-list 'load-path "~/.emacs.d/arduino-mode")
+;; (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . arduino-mode) auto-mode-alist))
+;; (autoload 'arduino-mode "arduino-mode" "Arduino editing mode." t)

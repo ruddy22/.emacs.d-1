@@ -1,8 +1,8 @@
 ;;; mmm-utils.el --- Coding Utilities for MMM Mode
 
-;; Copyright (C) 2000 by Michael Abraham Shulman
+;; Copyright (C) 2000-2003, 2011-2013  Free Software Foundation, Inc.
 
-;; Author: Michael Abraham Shulman <viritrilbia@users.sourceforge.net>
+;; Author: Michael Abraham Shulman <viritrilbia@gmail.com>
 
 ;;{{{ GPL
 
@@ -29,8 +29,6 @@
 ;; for MMM Mode.
 
 ;;; Code:
-
-(require 'cl)
 
 ;;{{{ Valid Buffer
 
@@ -119,7 +117,7 @@ is important that nil values disappear."
 Use of this macro can make code more readable when there are a lot of
 PARAMS, but less readable when there are only a few. Also best used
 only when it is important that nil values disappear."
-  `(append ,@(mapcar #'(lambda (param)
+  `(append ,@(mapcar (lambda (param)
                          (macroexpand `(mmm-save-keyword ,param)))
                      params)))
 
