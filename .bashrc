@@ -8,8 +8,7 @@ export EXPRESS_ENV='development'
 export EDITOR='emacs -nw'
 export GOPATH="$HOME/go-space"
 export PATH="$PATH:$GOPATH/bin"
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export PATH="$PATH:$HOME/.cargo/bin"
 
 [ -z "$PS1" ] && return
 
@@ -47,8 +46,9 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-export PS1='\[\e]0;\w\a\]\n\[\e[32m\]\u@\h: \[\e[33m\]\w\[\e[0m\]\n>>> '
-
+export CLICOLOR=1
+export LSCOLORS=ExFxCxDxBxegedabagacad
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 unset color_prompt force_color_prompt
 
 case "$TERM" in
@@ -77,8 +77,8 @@ alias iptable='iptables -L -v -n --line-number'
 alias cd..='cd ..'
 alias cd.='cd ..'
 alias ..=' cd ..'
-alias l='ls -alh --group-directories-first'
-alias ll='ls -alh --group-directories-first'
+alias l='ls -alh --group-directories-first --color'
+alias ll='ls -alh --group-directories-first --color'
 alias xs='cd'
 alias vf='cd'
 alias moer='more'
@@ -243,6 +243,7 @@ alias gra='git remote add'
 alias grr='git remote rm'
 alias gpu='git pull'
 alias gcl='git clone'
+alias gh='cat ~/.emacs.d/bash-helpers/git-cheat'
 
 alias forge='grunt-init'
 
@@ -252,10 +253,14 @@ alias pm2-dev='/home/unitech/keymetrics/pm2/bin/pm2-dev'
 alias pm2-docker='/home/unitech/keymetrics/pm2/bin/pm2-docker'
 alias pm2-runtime='/home/unitech/keymetrics/pm2/bin/pm2-runtime'
 
-alias ctl='systemctl'
-
-alias grid="/home/unitech/gridcontrol/gridcontrol/grid-cli/bin/grid"
-
 alias conn="cat /var/lib/misc/dnsmasq.leases"
-
 alias dockerstop='docker stop $(docker ps -a -q)'
+
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export PS1="\[\e]0;\w\a\]\n\[\e[32m\]\u@\h: \[\e[33m\]\w\[\e[0m\] \e[2m(\$(git branch 2>/dev/null | grep '^*' | colrm 1 2)) +[\!]\e[0m \n>>> "
+#export PS1="\[\033[0;33m\][\!]\`if [[ \$? = "0" ]]; then echo "\\[\\033[32m\\]"; else echo "\\[\\033[31m\\]"; fi\`[\u.\h: \`if [[ `pwd|wc -c|tr -d " "` > 18 ]]; then echo "\\W"; else echo "\\w"; fi\`]\$\[\033[0m\] "; echo -ne "\033]0;`hostname -s`:`pwd`\007"
+#export PS1="\\w:\$(git branch 2>/dev/null | grep '^*' | colrm 1 2)\$ "

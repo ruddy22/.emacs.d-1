@@ -204,12 +204,6 @@ line instead."
 (autoload 'shell-toggle-cd "~/.emacs.d/shell-toggle.el"
   "Pops up a shell-buffer and insert a \"cd <file-dir>\" command." t)
 
-;; ;;
-;; ;; TOML
-;; ;;
-;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/toml-mode"))
-;; (require 'toml-mode)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  VUE MODE!

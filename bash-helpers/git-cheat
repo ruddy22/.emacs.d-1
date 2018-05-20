@@ -1,0 +1,16 @@
+Git cheatsheet
+
+Undo last git add
+     git reset [file]
+
+Undo last git commit (code not pushed)
+     git reset HEAD~1
+
+Undo last git commit (pushed)
+     git revert HEAD
+
+Delete local & remote branch
+     git push origin --delete feature/iot-page
+
+Diff added
+     git diff --cached
