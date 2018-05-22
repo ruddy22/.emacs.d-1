@@ -22,7 +22,6 @@
 (setq make-backup-files nil)
 (setq backup-directory-alist `(("." . "~/.saves")))
 (setq delete-auto-save-files t)
-(setq create-lockfiles nil)
 (global-font-lock-mode t)
 (setq-default indicate-empty-lines t)
 (transient-mark-mode t)

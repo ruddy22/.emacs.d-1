@@ -14,3 +14,6 @@ Delete local & remote branch
 
 Diff added
      git diff --cached
+
+Checkout remote branch
+     git checkout <branch>
