@@ -228,13 +228,6 @@ line instead."
 ;;
 ;; Python mod
 ;;
-;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/python-mode"))
-;; (require 'python-mode)\
-(setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
-(setq interpreter-mode-alist (cons '("python" . python-mode)
-                                   interpreter-mode-alist))
-(autoload 'python-mode "python-mode" "Python editing mode." )
-
 ;; JS2-MODE (JAVASCRIPT)
 (add-hook 'js-mode-hook 'js2-minor-mode)
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
