@@ -248,6 +248,7 @@ alias gh='cat ~/.emacs.d/bash-helpers/git-cheat'
 alias forge='grunt-init'
 
 alias listbig='find . -type f -size +10000k -exec ls -lh {} \'
+alias xmp3='/home/unitech/sciences/xmp3/bin/xmp3'
 alias pm2='/home/unitech/keymetrics/pm2/bin/pm2'
 alias pm2-dev='/home/unitech/keymetrics/pm2/bin/pm2-dev'
 alias pm2-docker='/home/unitech/keymetrics/pm2/bin/pm2-docker'
