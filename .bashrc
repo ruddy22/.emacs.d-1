@@ -1,19 +1,24 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
 # Global
-export ENV='development'
-export RAILS_ENV='development'
-export NODE_ENV='development'
-export EXPRESS_ENV='development'
+
+export NODE_ENV='production'
 export EDITOR='emacs -nw'
-export GOPATH="$HOME/go-space"
-export PATH="$PATH:$GOPATH/bin"
-export PATH="$PATH:$HOME/.cargo/bin"
 
-[ -z "$PS1" ] && return
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-HISTCONTROL=ignoredups:ignorespace
+case $- in
+    *i*) ;;
+      *) return;;
+esac
 
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
@@ -34,31 +39,42 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color) color_prompt=yes;;
+    xterm-color|*-256color) color_prompt=yes;;
 esac
 
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	      color_prompt=yes
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
     else
-	      color_prompt=
+	color_prompt=
     fi
 fi
 
-export CLICOLOR=1
-export LSCOLORS=ExFxCxDxBxegedabagacad
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
 unset color_prompt force_color_prompt
 
+# If this is an xterm set the title to user@host:dir
 case "$TERM" in
-    xterm*|rxvt*)
-        PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@$HOSTNAME\a\]$PS1"
-        ;;
-    *)
-        ;;
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
 esac
 
+export LSCOLORS=ExFxCxDxBxegedabagacad
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -88,21 +104,9 @@ alias lll='ls -lh'
 alias la='ls -Ah'
 alias df='df -h'
 alias ne='emacs -nw'
-alias killrails='kill -s 9 `pgrep -f "rails.*"`'
-_rm(){
-    mv $1 /tmp
-}
-
-alias rm='rm'
-
-alias path='echo -e ${PATH//:/\\n}'
-alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
 alias which='type -a'
-
-
 alias du='du -kh'       # Makes a more readable output.
 alias df='df -kTh'
-
 alias grpe='grep'
 alias mroe='more'
 alias iv='vi'
@@ -120,100 +124,60 @@ fi
 
 ulimit -S -c 0          # Don't want any coredumps.
 
-function ii()   # Get current host related info.
-{
-    echo -e "\nYou are logged on ${RED}$HOSTNAME"
-    echo -e "\nAdditionnal information:$NC " ; uname -a
-    echo -e "\n${RED}Users logged on:$NC " ; w -h
-    echo -e "\n${RED}Current date :$NC " ; date
-    echo -e "\n${RED}Machine stats :$NC " ; uptime
-    echo -e "\n${RED}Memory stats :$NC " ; free
-    myip 2>&- ;
-    echo -e "\n${RED}Local IP Address :$NC" ; echo ${MY_IP:-"Not connected"}
-    echo -e "\n${RED}ISP Address :$NC" ; echo ${MY_ISP:-"Not connected"}
-    echo -e "\n${RED}Open connections :$NC "; netstat -pan --inet;
-    echo
-}
+# complete -A hostname   rsh rcp telnet rlogin r ftp ping disk
+# complete -A export     printenv
+# complete -A variable   export local readonly unset
+# complete -A enabled    builtin
+# complete -A alias      alias unalias
+# complete -A function   function
+# complete -A user       su mail finger
 
-function repeat()       # Repeat n times command.
-{
-    local i max
-    max=$1; shift;
-    for ((i=1; i <= max ; i++)); do  # --> C-like syntax
-        eval "$@";
-    done
-}
+# complete -A helptopic  help     # Currently, same as builtins.
+# complete -A shopt      shopt
+# complete -A stopped -P '%' bg
+# complete -A job -P '%'     fg jobs disown
 
-#=========================================================================
-# PROGRAMMABLE COMPLETION - ONLY SINCE BASH-2.04
-# Most are taken from the bash 2.05 documentation and from Ian McDonald's
-# 'Bash completion' package (http://www.caliban.org/bash/#completion).
-# You will in fact need bash more recent than 3.0 for some features.
-#=========================================================================
+# complete -A directory  mkdir rmdir
+# complete -A directory   -o default cd
 
-if [ "${BASH_VERSION%.*}" \< "3.0" ]; then
-    echo "You will need to upgrade to version 3.0 \
-for full programmable completion features."
-    return
-fi
-
-shopt -s extglob         # Necessary,
-#set +o nounset          # otherwise some completions will fail.
-
-complete -A hostname   rsh rcp telnet rlogin r ftp ping disk
-complete -A export     printenv
-complete -A variable   export local readonly unset
-complete -A enabled    builtin
-complete -A alias      alias unalias
-complete -A function   function
-complete -A user       su mail finger
-
-complete -A helptopic  help     # Currently, same as builtins.
-complete -A shopt      shopt
-complete -A stopped -P '%' bg
-complete -A job -P '%'     fg jobs disown
-
-complete -A directory  mkdir rmdir
-complete -A directory   -o default cd
-
-# Compression
-complete -f -o default -X '*.+(zip|ZIP)'  zip
-complete -f -o default -X '!*.+(zip|ZIP)' unzip
-complete -f -o default -X '*.+(z|Z)'      compress
-complete -f -o default -X '!*.+(z|Z)'     uncompress
-complete -f -o default -X '*.+(gz|GZ)'    gzip
-complete -f -o default -X '!*.+(gz|GZ)'   gunzip
-complete -f -o default -X '*.+(bz2|BZ2)'  bzip2
-complete -f -o default -X '!*.+(bz2|BZ2)' bunzip2
-complete -f -o default -X '!*.+(zip|ZIP|z|Z|gz|GZ|bz2|BZ2)' extract
+# # Compression
+# complete -f -o default -X '*.+(zip|ZIP)'  zip
+# complete -f -o default -X '!*.+(zip|ZIP)' unzip
+# complete -f -o default -X '*.+(z|Z)'      compress
+# complete -f -o default -X '!*.+(z|Z)'     uncompress
+# complete -f -o default -X '*.+(gz|GZ)'    gzip
+# complete -f -o default -X '!*.+(gz|GZ)'   gunzip
+# complete -f -o default -X '*.+(bz2|BZ2)'  bzip2
+# complete -f -o default -X '!*.+(bz2|BZ2)' bunzip2
+# complete -f -o default -X '!*.+(zip|ZIP|z|Z|gz|GZ|bz2|BZ2)' extract
 
 
-# Documents - Postscript,pdf,dvi.....
-complete -f -o default -X '!*.+(ps|PS)'  gs ghostview ps2pdf ps2ascii
-complete -f -o default -X '!*.+(dvi|DVI)' dvips dvipdf xdvi dviselect dvitype
-complete -f -o default -X '!*.+(pdf|PDF)' acroread pdf2ps
-complete -f -o default -X \
-    '!*.@(@(?(e)ps|?(E)PS|pdf|PDF)?(.gz|.GZ|.bz2|.BZ2|.Z))' gv ggv
-complete -f -o default -X '!*.texi*' makeinfo texi2dvi texi2html texi2pdf
-complete -f -o default -X '!*.tex' tex latex slitex
-complete -f -o default -X '!*.lyx' lyx
-complete -f -o default -X '!*.+(htm*|HTM*)' lynx html2ps
-complete -f -o default -X \
-    '!*.+(doc|DOC|xls|XLS|ppt|PPT|sx?|SX?|csv|CSV|od?|OD?|ott|OTT)' soffice
+# # Documents - Postscript,pdf,dvi.....
+# complete -f -o default -X '!*.+(ps|PS)'  gs ghostview ps2pdf ps2ascii
+# complete -f -o default -X '!*.+(dvi|DVI)' dvips dvipdf xdvi dviselect dvitype
+# complete -f -o default -X '!*.+(pdf|PDF)' acroread pdf2ps
+# complete -f -o default -X \
+#     '!*.@(@(?(e)ps|?(E)PS|pdf|PDF)?(.gz|.GZ|.bz2|.BZ2|.Z))' gv ggv
+# complete -f -o default -X '!*.texi*' makeinfo texi2dvi texi2html texi2pdf
+# complete -f -o default -X '!*.tex' tex latex slitex
+# complete -f -o default -X '!*.lyx' lyx
+# complete -f -o default -X '!*.+(htm*|HTM*)' lynx html2ps
+# complete -f -o default -X \
+#     '!*.+(doc|DOC|xls|XLS|ppt|PPT|sx?|SX?|csv|CSV|od?|OD?|ott|OTT)' soffice
 
-# Multimedia
-complete -f -o default -X \
-    '!*.+(gif|GIF|jp*g|JP*G|bmp|BMP|xpm|XPM|png|PNG)' xv gimp ee gqview
-complete -f -o default -X '!*.+(mp3|MP3)' mpg123 mpg321
-complete -f -o default -X '!*.+(ogg|OGG)' ogg123
-complete -f -o default -X \
-    '!*.@(mp[23]|MP[23]|ogg|OGG|wav|WAV|pls|m3u|xm|mod|s[3t]m|it|mtm|ult|flac)' xmms
-complete -f -o default -X \
-    '!*.@(mp?(e)g|MP?(E)G|wma|avi|AVI|asf|vob|VOB|bin|dat|vcd|\
-ps|pes|fli|viv|rm|ram|yuv|mov|MOV|qt|QT|wmv|mp3|MP3|ogg|OGG|\
-ogm|OGM|mp4|MP4|wav|WAV|asx|ASX)' xine
+# # Multimedia
+# complete -f -o default -X \
+#     '!*.+(gif|GIF|jp*g|JP*G|bmp|BMP|xpm|XPM|png|PNG)' xv gimp ee gqview
+# complete -f -o default -X '!*.+(mp3|MP3)' mpg123 mpg321
+# complete -f -o default -X '!*.+(ogg|OGG)' ogg123
+# complete -f -o default -X \
+#     '!*.@(mp[23]|MP[23]|ogg|OGG|wav|WAV|pls|m3u|xm|mod|s[3t]m|it|mtm|ult|flac)' xmms
+# complete -f -o default -X \
+#     '!*.@(mp?(e)g|MP?(E)G|wma|avi|AVI|asf|vob|VOB|bin|dat|vcd|\
+# ps|pes|fli|viv|rm|ram|yuv|mov|MOV|qt|QT|wmv|mp3|MP3|ogg|OGG|\
+# ogm|OGM|mp4|MP4|wav|WAV|asx|ASX)' xine
 
-complete -f -o default -X '!*.pl'  perl perl5
+# complete -f -o default -X '!*.pl'  perl perl5
 
 monit()
 {
@@ -249,21 +213,17 @@ alias forge='grunt-init'
 
 alias listbig='find . -type f -size +10000k -exec ls -lh {} \'
 alias xmp3='/home/unitech/sciences/xmp3/bin/xmp3'
-alias pm2='/home/unitech/keymetrics/pm2/bin/pm2'
-alias pm2-dev='/home/unitech/keymetrics/pm2/bin/pm2-dev'
-alias pm2-docker='/home/unitech/keymetrics/pm2/bin/pm2-docker'
-alias pm2-runtime='/home/unitech/keymetrics/pm2/bin/pm2-runtime'
 
 alias conn="cat /var/lib/misc/dnsmasq.leases"
 alias dockerstop='docker stop $(docker ps -a -q)'
 
-export PS1="\[\e]0;\w\a\]\n\[\e[32m\]\u@\h: \[\e[33m\]\w\[\e[0m\] \e[2m(\$(git branch 2>/dev/null | grep '^*' | colrm 1 2)) +[\!]\e[0m \n>>> "
-#export PS1="\[\033[0;33m\][\!]\`if [[ \$? = "0" ]]; then echo "\\[\\033[32m\\]"; else echo "\\[\\033[31m\\]"; fi\`[\u.\h: \`if [[ `pwd|wc -c|tr -d " "` > 18 ]]; then echo "\\W"; else echo "\\w"; fi\`]\$\[\033[0m\] "; echo -ne "\033]0;`hostname -s`:`pwd`\007"
-#export PS1="\\w:\$(git branch 2>/dev/null | grep '^*' | colrm 1 2)\$ "
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# # enable programmable completion features (you don't need to enable
+# # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# # sources /etc/bash.bashrc).
+# if ! shopt -oq posix; then
+#   if [ -f /usr/share/bash-completion/bash_completion ]; then
+#     . /usr/share/bash-completion/bash_completion
+#   elif [ -f /etc/bash_completion ]; then
+#     . /etc/bash_completion
+#   fi
+# fi
