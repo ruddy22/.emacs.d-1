@@ -2,7 +2,7 @@
 
 # Global
 
-export NODE_ENV='production'
+export NODE_ENV='development'
 export EDITOR='emacs -nw'
 
 export NVM_DIR="$HOME/.nvm"
@@ -209,6 +209,8 @@ alias gpu='git pull'
 alias gcl='git clone'
 alias gh='cat ~/.emacs.d/bash-helpers/git-cheat'
 
+alias pm2='/home/unitech/keymetrics/pm2/bin/pm2'
+alias pm2-runtime='/home/unitech/keymetrics/pm2/bin/pm2-runtime'
 alias forge='grunt-init'
 
 alias listbig='find . -type f -size +10000k -exec ls -lh {} \'
